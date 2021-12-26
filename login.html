@@ -15,9 +15,11 @@
     <div id="loginPanel">
         <form id="login" action="php/login.php" method="post">
             <h2>Inicia Sesión</h2>
-            <div id="elemento">
-                <label for="usuario"><i class="bi bi-person-circle"></i>Usuario</label>
-                <input type="text" id="usuario" name="usuario">
+            <div class="columna">
+                <div id="elemento">
+                <label for="usuario" class="nombre"><i class="bi bi-person-circle"></i>Usuario</label>
+                <input type="text" id="usuario" name="usuario" required>
+            </div>
             </div>
             <div id="elemento">
                 <label for="contra">Contraseña</label>
@@ -26,6 +28,7 @@
             <div id="elemento">
                 <input type="submit" value="Inicia Sesión">
             </div>
+            <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a>.</p>
     </div>
     </form>
 </body>

@@ -1,35 +1,77 @@
 html {
     height: 100%;
+    font-family: inherit;
+    box-sizing: border-box;
 }
 
 #logo {
-    width: 350px;
-    height: 350px;
+    width: 250px;
+    height: 250px;
     text-align: center;
     margin: 0 auto;
+    /* margin-bottom: -5px; */
     display: block;
+    padding: 0;
 }
 
 #loginPanel {
     text-align: center;
-    box-shadow: 1px 0 4px rgba(0,0,0,0.2);
-    padding: 15px;
-    position: relative;
-    top: 30px;
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
     margin: auto;
     max-width: 50%;
     border-radius: 10px;
+}
+
+#loginPanel label.nombre {
+    width: 50px;
+}
+
+/* #loginPanel label.apellidos, #loginPanel input.apellidos {
+    width: 45%;
+    display: inline;
+    position: relative;
+    float: right;
+} */
+
+.columna {
+    margin-top: 30px;
+    float: left;
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.nya {
+    margin-top: 20px;
+    margin-left: 15%;
+    /* margin-right: 5px; */
+    width: 35%;
+    float: left;
+}
+
+.apl {
+    margin-top: 20px;
+    margin-right: 15%;
+    width: 35%;
+    float: right;
+}
+
+.linea:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 #loginPanel h2 {
     color: #e6967b;
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-size: 1.55em;
 }
 
 #loginPanel #elemento label {
-    margin-top: 25px;
-    margin-bottom: 10px;
+    /* margin-top: 25px;
+    margin-bottom: 10px; */
     display: block;
     color: #e6967b;
 }
@@ -42,6 +84,7 @@ html {
     padding: 10px;
     border-bottom: 1px solid gray;
     margin-bottom: 30px;
+    outline: none;
 }
 
 #loginPanel #elemento input[type="submit"] {
@@ -52,10 +95,19 @@ html {
     background: #e6967b;
 }
 
-#loginPanel #elemento input[type="submit"]:hover, #loginPanel #elemento input[type="submit"]:focus {
+#loginPanel #elemento input:focus {
+    border-bottom: 1px solid #e6967b;
+}
+
+#loginPanel #elemento input[type="submit"]:active, #loginPanel #elemento input[type="submit"]:focus {
     letter-spacing: 2.5px;
     text-transform: uppercase;
     padding: 10px;
     background-color: white;
+    color: #e6967b;
+    margin-top: 25px;
+}
+
+p a:active, p a:link, p a:hover, p a:focus, p a {
     color: #e6967b;
 }
