@@ -1,0 +1,61 @@
+html {
+    height: 100%;
+}
+
+#logo {
+    width: 350px;
+    height: 350px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+#loginPanel {
+    text-align: center;
+    box-shadow: 1px 0 4px rgba(0,0,0,0.2);
+    padding: 15px;
+    position: relative;
+    top: 30px;
+    margin: auto;
+    max-width: 50%;
+    border-radius: 10px;
+}
+
+#loginPanel h2 {
+    color: #e6967b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#loginPanel #elemento label {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: block;
+    color: #e6967b;
+}
+
+#loginPanel #elemento input {
+    width: 75%;
+    padding: 5px 0;
+    margin-bottom: 25px;
+    border: none;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 30px;
+}
+
+#loginPanel #elemento input[type="submit"] {
+    border: 1px solid gray;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 10px;
+    background: #e6967b;
+}
+
+#loginPanel #elemento input[type="submit"]:hover, #loginPanel #elemento input[type="submit"]:focus {
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 10px;
+    background-color: white;
+    color: #e6967b;
+}
