@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+
 html {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,50 +11,50 @@ body {
 }
 
 a.alogo {
+    margin: 0 auto;
     display: inline-block;
+    text-align: center;
+    width: 250px;
+    height: 250px;
+    z-index: 1;
 }
 
 #logo {
-    width: 250px;
-    height: 250px;
+    width: 270px;
+    height: 270px;
     text-align: center;
     margin: 0 auto;
-    position: relative;
-    top: 35px;
     /* margin-bottom: -5px; */
     display: block;
     padding: 0;
 }
 
 #loginPanel {
+    position: relative;
     text-align: center;
     box-shadow: 1px 0 4px rgba(0, 0, 0, 0.2);
     padding: 10px;
-    position: relative;
     margin: auto;
     max-width: 50%;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
-#loginPanel label.nombre {
-    width: 50px;
+.nya {
     text-align: center;
     margin: 0 auto;
 }
 
-/* #loginPanel label.apellidos, #loginPanel input.apellidos {
-    width: 45%;
-    display: inline;
-    position: relative;
-    float: right;
-} */
-
 #loginPanel h2 {
     color: #e6967b;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     font-size: 1.55em;
+}
+
+#loginPanel #elemento {
+    padding: 0;
+    width: 100%;
 }
 
 #loginPanel #elemento label {
@@ -62,7 +64,27 @@ a.alogo {
     color: #e6967b;
 }
 
+#loginPanel #elemento label.nombre {
+    text-align: center;
+} 
+
+#loginPanel #elemento input.nombre {
+    width: 40%;
+    /* float: left; */
+}
+
+#loginPanel #elemento input.apellidos, #loginPanel #elemento label.apellidos {
+    width: 40%;
+    /* float: right; */
+}
+
+#loginPanel #elemento input.email, #loginPanel #elemento label.email {
+    margin-top: 15px;
+    width: 50%;
+}
+
 #loginPanel #elemento input {
+    margin-top: 15px;
     width: 55%;
     padding: 5px 0;
     margin-bottom: 25px;
@@ -70,7 +92,7 @@ a.alogo {
     padding: 10px;
     border-bottom: 1px solid gray;
     margin-bottom: 30px;
-    outline: none;
+    outline: none; /* Esto hace que no se vea el bloque horroroso */
 }
 
 #loginPanel #elemento input[type="submit"] {
@@ -88,6 +110,10 @@ a.alogo {
 #loginPanel #elemento input[type="submit"]:focus {
     background-color: white;
     color: #e6967b;
+}
+
+#loginPanel #elemento input[type="submit"]:hover {
+    cursor: pointer;
 }
 
 p a:active, p a:link, p a:hover, p a:focus, p a {

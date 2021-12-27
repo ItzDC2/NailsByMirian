@@ -18,8 +18,7 @@
             <a href="#">Pide Cita</a>
             <a href="#">Contáctanos</a>
             <a href="#">Conócenos</a>
-            <a href="register.html">Regístrate</a>
-            <!-- <a href="login.html">Logueate</a> -->
+            <a href="login.html">Inicia Sesión</a>
         </nav>
         <div class="columna">
             <p class="pasidel">
