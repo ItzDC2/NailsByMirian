@@ -1,5 +1,15 @@
 <?php
 
+    $nombre = "";
+    $apellidos = "";
+    $email = "";
+    $contra = "";
+    $contra2 = "";
+
+    $errorUsuario = "";
+    $errorPass = "";
+    $comentario = "";
+
     function imprimirAConsola($salida, $con_tags_de_scripts = true) {
         $js_code = 'console.log(' . json_encode($salida, JSON_HEX_TAG) . ');';
         if($con_tags_de_scripts) {

@@ -1,3 +1,7 @@
+<?php 
+    require_once "php/config.php";
+?>
+
 <html lang="en">
 
 <head>
@@ -5,12 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilosIndex.css">
-    <link rel="icon" href="imgs/nail-circled.png" type="image/x-icon" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" href="imgs/nail-circled.png" type="image/x-icon"/>
     <title>MirianNails</title>
 </head>
-
 <body>
     <img src="imgs/nail.jpg" id="logo">
     <div class="navegacion">
@@ -18,7 +19,13 @@
             <a href="#">Pide Cita</a>
             <a href="#">Contáctanos</a>
             <a href="#">Conócenos</a>
-            <a href="login.html">Inicia Sesión</a>
+            <?php 
+                if(!true) {
+                    echo "";
+                } else {
+                    echo "<a href="."login.html".">Inicia Sesión</a>";
+                }
+            ?>
         </nav>
         <div class="columna">
             <p class="pasidel">

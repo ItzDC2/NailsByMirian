@@ -8,20 +8,18 @@ body {
     text-align: center;
 }
 
+#logodiv {
+    text-align: center;
+}
+
 a.alogo {
     display: inline-block;
+    z-index: 1;
 }
 
 #logo {
     width: 250px;
     height: 250px;
-    text-align: center;
-    margin: 0 auto;
-    position: relative;
-    top: 35px;
-    /* margin-bottom: -5px; */
-    display: block;
-    padding: 0;
 }
 
 #loginPanel {

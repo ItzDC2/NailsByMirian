@@ -1,5 +1,3 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
-
 html {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,102 +18,25 @@ a.alogo {
 }
 
 #logo {
-    width: 270px;
-    height: 270px;
+    width: 250px;
+    height: 250px;
     text-align: center;
     margin: 0 auto;
-    /* margin-bottom: -5px; */
     display: block;
     padding: 0;
 }
+html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
 
-#loginPanel {
-    position: relative;
+h2 {
+    font-size: 1.1em;
+    color: #e6967b;
+}
+
+.container {
+    width: 75%;
     text-align: center;
-    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    margin: auto;
-    max-width: 50%;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.nya {
-    text-align: center;
-    margin: 0 auto;
-}
-
-#loginPanel h2 {
-    color: #e6967b;
-    text-transform: uppercase;
-    margin-bottom: 25px;
-    font-size: 1.55em;
-}
-
-#loginPanel #elemento {
-    padding: 0;
-    width: 100%;
-}
-
-#loginPanel #elemento label {
-    /* margin-top: 25px;
-    margin-bottom: 10px; */
-    display: block;
-    color: #e6967b;
-}
-
-#loginPanel #elemento label.nombre {
-    text-align: center;
-} 
-
-#loginPanel #elemento input.nombre {
-    width: 40%;
-    /* float: left; */
-}
-
-#loginPanel #elemento input.apellidos, #loginPanel #elemento label.apellidos {
-    width: 40%;
-    /* float: right; */
-}
-
-#loginPanel #elemento input.email, #loginPanel #elemento label.email {
-    margin-top: 15px;
-    width: 50%;
-}
-
-#loginPanel #elemento input {
-    margin-top: 15px;
-    width: 55%;
-    padding: 5px 0;
-    margin-bottom: 25px;
-    border: none;
-    padding: 10px;
-    border-bottom: 1px solid gray;
-    margin-bottom: 30px;
-    outline: none; /* Esto hace que no se vea el bloque horroroso */
-}
-
-#loginPanel #elemento input[type="submit"] {
-    border: 1px solid gray;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    padding: 10px;
-    background: #e6967b;
-}
-
-#loginPanel #elemento input:focus {
-    border-bottom: 1px solid #e6967b;
-}
-
-#loginPanel #elemento input[type="submit"]:focus {
-    background-color: white;
-    color: #e6967b;
-}
-
-#loginPanel #elemento input[type="submit"]:hover {
-    cursor: pointer;
-}
-
-p a:active, p a:link, p a:hover, p a:focus, p a {
-    color: #e6967b;
 }
