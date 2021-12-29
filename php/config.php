@@ -28,7 +28,7 @@
     if($bd == false) {
         die("ERROR: No se ha podido conectar con la base de datos.");
     } else {
-        imprimirAConsola("Conectado correctamente");
+        // imprimirAConsola("Conectado correctamente");
     }
 
 ?>

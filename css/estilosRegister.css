@@ -2,6 +2,7 @@ html {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -19,6 +20,10 @@ h2 {
     display: inline-block;
     border-radius: 10px;
 
+}
+
+#loginPanel:hover + #loginPanel:focus {
+    z-index: 1;
 }
 
 .input-field input:focus + label {
@@ -46,20 +51,20 @@ button:hover {
     cursor:pointer;
 }
 
-a.alogo {
+/* a.alogo {
     margin: 0 auto;
     display: inline-block;
     width: 250px;
     height: 250px;
     z-index: 1;
-}
+} */
 
 #logo {
-    width: 250px;
-    height: 250px;
+    width: 235px;
+    height: 235px;
     text-align: center;
     margin: 0 auto;
-    display: block;
+    display: inline-block;
     padding: 0;
 }
 

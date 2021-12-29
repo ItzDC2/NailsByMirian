@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-    require_once ("php/config.php");
+require_once("php/config.php");
 
 ?>
 <!DOCTYPE html>
@@ -15,15 +15,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/scroll.js"></script>
     <script src="js/redireccion.js"></script>
     <title>Regístrate</title>
 </head>
 
-<body>
+<body onload="scroll()">
     <a href="index.php" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
     <br>
     <div id="loginPanel" class="col s6 offset-s3 card-panel hoverable">
-        <form id="login" action="" method="post" class="col s12" onsubmit="redireccion()">
+        <form id="login" method="post" class="col s12" action="php/register_auth.php">
             <h2>Crea tu cuenta</h2>
             <div class="row">
                 <div class="input-field col s6">
@@ -54,15 +55,13 @@
                 </div>
             </div>
             <div class="row">
-                <a href="php/register_auth.php">
-                    <button type="submit" class="btn waves-effect">REGÍSTRATE <i class="bi bi-box-arrow-in-right"></i></button>
-                </a>
+                <button type="submit" class="btn waves-effect" name="regButton">REGÍSTRATE <i class="bi bi-box-arrow-in-right"></i></button>
             </div>
             <div class="row">
                 <span>¿Ya tienes una cuenta con nosotros? <a href="login.php">Inicia sesión</a>.</span>
             </div>
         </form>
     </div>
-</body >
+</body>
 
-</html >
+</html>

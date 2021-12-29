@@ -1,3 +1,38 @@
-button {
-    
+#comentarioPHP {
+    text-align: center !important;
+}
+
+body {
+    text-align: center;
+}
+
+#logo {
+    width: 235px;
+    height: 235px;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 0;
+}
+
+#aceptarBtn {
+    width: 50%;
+    background-color: #e6967b !important;
+    color: black;
+    text-transform: uppercase;
+}
+
+#errorBtn {
+    width: 50%;
+    background-color: #e6967b !important;
+    color: black;
+    text-transform: uppercase;
+}
+
+.waves-effect {
+    background-color: #e6967b;
+}
+
+button:hover {
+    cursor:pointer;
 }
