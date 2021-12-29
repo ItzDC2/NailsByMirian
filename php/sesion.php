@@ -1,8 +1,8 @@
 <?php 
     
     session_start();
-    if(!isset($_SESSION['usuario'])) {
-        header('Location: registrer.php');
+    if(!isset($_SESSION['iNombre'])) {
+        header('Location: ../register.php');
         exit();
     }
 

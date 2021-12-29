@@ -1,1 +1,0 @@
-document.getElementById("error_msg").style.visibility=true;

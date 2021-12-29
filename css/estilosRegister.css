@@ -8,10 +8,47 @@ body {
     text-align: center;
 }
 
+h2 {
+    font-size: 2em !important;
+    text-transform: uppercase;
+    color: #e6967b;
+}
+
+#loginPanel {
+    width: 50%;
+    display: inline-block;
+    border-radius: 10px;
+
+}
+
+.input-field input:focus + label {
+    color: #e6967b !important;
+}
+
+.input-field input:focus {
+    border-bottom: 1px solid #e6967b !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background-color: #e6967b !important;
+    color: black;
+    text-transform: uppercase;
+}
+
+.waves-effect {
+    background-color: #e6967b;
+}
+
+button:hover {
+    cursor:pointer;
+}
+
 a.alogo {
     margin: 0 auto;
     display: inline-block;
-    text-align: center;
     width: 250px;
     height: 250px;
     z-index: 1;
@@ -25,18 +62,7 @@ a.alogo {
     display: block;
     padding: 0;
 }
-html {
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
-}
 
-h2 {
-    font-size: 1.1em;
+p a:active, p a:link, p a:hover, p a:focus, p a {
     color: #e6967b;
-}
-
-.container {
-    width: 75%;
-    text-align: center;
 }

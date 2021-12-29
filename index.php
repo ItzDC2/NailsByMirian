@@ -1,5 +1,6 @@
 <?php 
     require_once "php/config.php";
+    // require_once "php/register_auth.php";
 ?>
 
 <html lang="en">
@@ -20,10 +21,11 @@
             <a href="#">Contáctanos</a>
             <a href="#">Conócenos</a>
             <?php 
+                $doc = "login.php";
                 if(!true) {
-                    echo "";
+                    echo "¡Bienvenido " . $nombre . "!";
                 } else {
-                    echo "<a href="."login.html".">Inicia Sesión</a>";
+                    echo "<a href=".$doc.">Inicia Sesión</a>";
                 }
             ?>
         </nav>
