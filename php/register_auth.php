@@ -23,13 +23,18 @@ if (isset($_POST['regButton'])) {
             $email = sanitizar2($email);
             $contra = md5($contra);
             $contra2 = md5($contra2);
+            $sqlEmail = mysqli_query($bd, "SELECT * FROM Usuarios WHERE (Nombre ='$nombre')");
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $ruta = "../js/json/archivo.json";
-                        $comentario = "Debes introducir un email válido.";
+                        $comentario = "<p>Debes introducir un email válido.</p>";
                         file_put_contents($ruta, json_encode($comentario), true);
                         $exito = false;
                         //Si no existe ya...
-            // } else if()
+            } else if(mysqli_num_rows($sqlEmail) != 0) {
+                $ruta = "../js/json/archivo.json";
+                $comentario = "<p>Ese correo ya está asignado a otro usuario.</p>";
+                file_put_contents($ruta, json_encode($comentario), true);
+                $exito = false;
             } else {
                     $fechaCrea = date("Y-m-d H:i:s");
                     $sql = "INSERT INTO Usuarios (Nombre, Apellidos, Email, Contra, FechaCrea) VALUES" . " ('" . $nombre . "', '" .
