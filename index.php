@@ -1,8 +1,8 @@
 <?php 
     require_once "php/config.php";
-    // require_once "php/register_auth.php";
+    // include "php/sesion.php";
+        
 ?>
-
 <html lang="en">
 
 <head>
@@ -22,8 +22,9 @@
             <a href="#">Conócenos</a>
             <?php 
                 $doc = "login.php";
-                if(!true) {
-                    echo "¡Bienvenido " . $nombre . "!";
+                if(isset($_SESSION['nombre']) || isset($_SESSION['logueado'])) {  
+                    $_SESSION['nombre'] = $nombre;
+                    echo "¡Bienvenid@ " . $nombre . "!";
                 } else {
                     echo "<a href=".$doc.">Inicia Sesión</a>";
                 }
@@ -68,3 +69,4 @@
     </div>
 </body>
 </html>
+

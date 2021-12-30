@@ -16,7 +16,6 @@ require_once("php/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/scroll.js"></script>
-    <script src="js/redireccion.js"></script>
     <title>Regístrate</title>
 </head>
 
@@ -28,29 +27,29 @@ require_once("php/config.php");
             <h2>Crea tu cuenta</h2>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="iNombre" type="text" name="iNombre">
+                    <input id="iNombre" type="text" name="iNombre" required>
                     <label for="iNombre">Nombre <i class="bi bi-person-circle"></i></label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="iApellidos" type="text" name="iApellidos">
+                    <input id="iApellidos" type="text" name="iApellidos" required>
                     <label for="iApellidos">Apellidos <i class="bi bi-person-circle"></i></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="iEmail" type="email" name="iEmail">
+                    <input id="iEmail" type="email" name="iEmail" required>
                     <label for="iEmail">Email <i class="bi bi-envelope"></i></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="password" id="iContra" name="iContra">
+                    <input type="password" id="iContra" name="iContra" required>
                     <label for="iContra">Contraseña <i class="bi bi-key-fill"></i></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="password" id="iContra2" name="iContra2">
+                    <input type="password" id="iContra2" name="iContra2" required>
                     <label for="iContra2">Repita su contraseña <i class="bi bi-key-fill"></i></label>
                 </div>
             </div>

@@ -1,10 +1,32 @@
 #comentarioPHP {
     text-align: center !important;
+    padding: 5px;
 }
 
 body {
     text-align: center;
 }
+
+/* progress {
+    border: 0;
+    border-radius: 5px;
+    background-color: blue;
+}
+progress::-webkit-progress-bar {
+    border: 0;
+    border-radius: 5px;
+    background-color: blue;
+}
+progress::-webkit-progress-value {
+    border: 0;
+    border-radius: 5px;
+    background-color: blue;
+}
+progress::-moz-progress-bar {
+    border: 0;
+    border-radius: 5px;
+    background-color: blue;
+} */
 
 #logo {
     width: 235px;
@@ -29,10 +51,14 @@ body {
     text-transform: uppercase;
 }
 
+#errorPHP {
+    padding: 50px !important;
+}
+
 .waves-effect {
     background-color: #e6967b;
 }
 
 button:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
