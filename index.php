@@ -1,7 +1,6 @@
-<?php 
-    require_once "php/config.php";
-    // include "php/sesion.php";
-        
+<?php
+require_once "php/config.php";
+error_reporting(0);
 ?>
 <html lang="en">
 
@@ -10,9 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilosIndex.css">
-    <link rel="icon" href="imgs/nail-circled.png" type="image/x-icon"/>
+    <link rel="icon" href="imgs/nail-circled.png" type="image/x-icon" />
     <title>MirianNails</title>
 </head>
+
 <body>
     <img src="imgs/nail.jpg" id="logo">
     <div class="navegacion">
@@ -20,14 +20,15 @@
             <a href="#">Pide Cita</a>
             <a href="#">Contáctanos</a>
             <a href="#">Conócenos</a>
-            <?php 
-                $doc = "login.php";
-                if(isset($_SESSION['nombre']) || isset($_SESSION['logueado'])) {  
-                    $_SESSION['nombre'] = $nombre;
-                    echo "¡Bienvenid@ " . $nombre . "!";
-                } else {
-                    echo "<a href=".$doc.">Inicia Sesión</a>";
-                }
+            <?php
+            // session_start();
+            $doc = "login.php";
+            if(!$_SESSION['logueado']) {
+                echo "<a href='$doc'>Inicia Sesión</a>";
+            } else {
+                echo "</nav>";
+                echo "¡Bienvenid@ '$nombre'!";
+            }
             ?>
         </nav>
         <div class="columna">
@@ -68,5 +69,5 @@
         </div>
     </div>
 </body>
-</html>
 
+</html>

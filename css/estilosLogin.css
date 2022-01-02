@@ -51,7 +51,6 @@ a.alogo {
     display: inline-block;
     width: 250px;
     height: 250px;
-    z-index: 1;
 }
 
 #logo {
@@ -65,4 +64,17 @@ a.alogo {
 
 p a:active, p a:link, p a:hover, p a:focus, p a {
     color: #e6967b;
+}
+
+#divAbajo {
+    margin: 50px 45%;
+    padding: 2.5px;
+}
+
+#divAbajo:hover{
+    cursor: pointer;
+}
+
+#aceptarLogout {
+
 }
