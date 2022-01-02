@@ -30,6 +30,7 @@
         $sql = "SELECT * FROM Usuarios WHERE email='$email' AND contra = '$contra'";
         $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
         $lineas = mysqli_num_rows($resultado);
+
         if($lineas != 0) {
             $nombreSQL = "SELECT Nombre FROM Usuarios WHERE (Email='$email')";
             session_start();
@@ -39,6 +40,8 @@
             if($lineasNombre != 0) {
                 $nombre = $nombreSQL;
             }
+        if($lineas == 1) {
+            $_SESSION["logueado"] = true;
         } else {
             $comentario = "<p>Email o Contraseña Incorrectos</p>";
             escribirError($comentario);

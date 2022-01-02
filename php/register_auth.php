@@ -2,6 +2,108 @@
 require_once ("./config.php");
 error_reporting(0);
 if($_SESSION['logueado'] != false) {
+
+require("./config.php");
+
+$exito = false;
+
+if (isset($_POST['regButton'])) {
+    $nombre = $_REQUEST["iNombre"];
+    $apellidos = $_REQUEST["iApellidos"];
+    $email = $_REQUEST["iEmail"];
+    $contra = ($_REQUEST["iContra"]);
+    $contra2 = ($_REQUEST["iContra2"]);
+    if (!empty($nombre) && !empty($apellidos) && !empty($email) && !empty($contra) && !empty($contra2)) {
+        if (estanOk($contra, $contra2)) {
+            $nombre = stripslashes($nombre);
+            $nombre = sanitizar($bd, $nombre);
+            $nombre = sanitizar2($nombre);
+            $apellidos = stripslashes($apellidos);
+            $apellidos = sanitizar($bd, $apellidos);
+            $apellidos = sanitizar2($apellidos);
+            $email = stripslashes($email);
+            $email = sanitizar($bd, $email);
+            $email = sanitizar2($email);
+            $contra = md5($contra);
+            $contra2 = md5($contra2);
+            $sqlEmail = mysqli_query($bd, "SELECT * FROM Usuarios WHERE (Nombre ='$nombre')");
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $ruta = "../js/json/archivo.json";
+                        $comentario = "<p>Debes introducir un email válido.</p>";
+                        file_put_contents($ruta, json_encode($comentario), true);
+                        $exito = false;
+                        //Si no existe ya...
+            } else if(mysqli_num_rows($sqlEmail) != 0) {
+                $ruta = "../js/json/archivo.json";
+                $comentario = "<p>Ese correo ya está asignado a otro usuario.</p>";
+                file_put_contents($ruta, json_encode($comentario), true);
+                $exito = false;
+            } else {
+                    $fechaCrea = date("Y-m-d H:i:s");
+                    $sql = "INSERT INTO Usuarios (Nombre, Apellidos, Email, Contra, FechaCrea) VALUES" . " ('" . $nombre . "', '" .
+                        $apellidos . "'" . ", '" . $email . "', '" . $contra . "', '" . $fechaCrea . "');";
+        
+                    $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
+        
+                    if ($resultado) {
+                        $exito = true;
+                        $comentario = "<p>¡Te has registrado correctamente!</p>";
+                        $_SESSION['iNombre'] = $nombre;
+                    } else {
+                        $exito = false;
+                        echo "Error:" . $bd->connect_error;
+                        die();
+                    }
+                } 
+            
+            // if ($contra == $contra2) {
+
+            // } else {
+            //     $comentario = "<p>Las contraseñas deben ser iguales</p>";
+            // }
+            // if (strlen($contra) >= 6 or strlen($contra2) >= 6) {
+            // } else {
+            //     $comentario = "<p>La longitud de la contraseña debe ser mayor de 6</p>";
+            // }
+        }
+    } else {
+        $exito = false;
+        $comentario = "<p>Todos los apartados son obligatorios, por favor rellénelos.</p>";
+        file_put_contents("../js/json/archivo.json", json_encode($comentario), true);
+    }
+}
+
+mysqli_close($bd); 
+
+function sanitizar($bd, $datos) {
+    return mysqli_real_escape_string($bd, $datos);
+}
+
+function sanitizar2($datos) {
+    return htmlspecialchars($datos);
+}
+
+function estanOk($contra1, $contra2) {
+    $ruta = "../js/json/archivo.json";
+    $resultado = false;
+    if($contra1 != $contra2) {
+        $exito = false;
+        $resultado = false;
+        $comentario = "<p>Las contraseñas deben ser iguales</p>";
+        file_put_contents($ruta, json_encode($comentario), true);
+    } else if(strlen($contra1) < 6 || strlen($contra2) < 6) {
+        $resultado = false;
+        $exito = false;
+        $comentario = "<p>La longitud de la contraseña debe ser mayor que 6.</p>";
+        file_put_contents($ruta, json_encode($comentario), true);
+    } else {
+        $resultado = true;
+        $exito = true;
+        $comentario = "";
+    }   
+    return $resultado;
+
+}
 ?>
 
     <!DOCTYPE html>
