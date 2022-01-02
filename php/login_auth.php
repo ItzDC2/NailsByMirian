@@ -54,7 +54,7 @@
     }
 
 mysqli_close($bd);
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
