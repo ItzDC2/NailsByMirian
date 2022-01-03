@@ -2,7 +2,36 @@
 
 require_once("php/config.php");
 
-?>
+    if($_SESSION['logueado'] != false) {
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+            <link rel="stylesheet" href="css/estilosLogin.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <title>Login</title>
+        </head>
+        <body>
+            <div class="container">
+                <div id="ErrorLogin" class="col s12 card-panel center-align hoverable" style="border: 1px solid red; margin: 15px 15px;">
+                    <p>
+                        ¡Ya has iniciado sesión!
+                    </p>
+                    <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index.php'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                    <p id="comentarioVolver">
+                        O si quieres, dale click <a href="php/logout.php">aquí</a> para cerrar sesión.
+                    </p>
+                </div>
+            </div>
+        </body>
+        </html>
+    <?php
+    } else {
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,3 +93,8 @@ require_once("php/config.php");
 </body>
 
 </html>
+<?php 
+}
+?>
+
+

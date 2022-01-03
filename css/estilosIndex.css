@@ -6,6 +6,7 @@ html {
 
 body {
     background: linear-gradient();
+    transition: linear ease-in 2s;
 }
 
 #logo {
@@ -25,49 +26,133 @@ body {
     transition: linear 1s;
 }
 
+.s6 {
+    margin-right: 25px;
+}
+
 .navegacion {
     max-width: 75%;
     margin: 0 auto;
 }
 
-nav {
+#comentarioNombre {
+    margin-top: 25px;
+    padding: 2.5px;
+}
+
+#comentarioNombre p {
+    color: #e6967b;
+    font-size: 1.5em;
+}
+
+ul {
     position: relative;
     text-align: center;
     margin: 0;
 }
 
-nav a {
+ul li {
+    display: inline-block;
+
+}
+
+ul li a {
     box-shadow: 1px 0 4px rgba(0,0,0,0.2);
     font-size: 1.3em;
     text-transform: bold;
     padding: 10px;
-    display: inline-block;
     text-decoration: none;
     color: #e6967b;
+    background-color: #fff;
 }
 
-nav a:hover {
+ul li a:hover {
     background-color: #e6967b;
     color: white;
 }
 
-.columna {
-    margin-top: 30px;
-    float: left;
-    width: 50%;
+#divCS {
+    position: absolute;
+    top: 10;
+    right: 25;
 }
 
-.columna p {
-    box-shadow: 1px 0 4px rgba(0,0,0,0.2);
-    margin-left: 30px;  
-    padding: 10px; 
+#opciones {
+    position: absolute;
+    top: 25;
+    right: 25;
+    font-size: 1.5em;
+}
+
+#opciones:hover {
+    cursor: pointer; 
     color: #e6967b;
 }
 
-.columna img {
-    width: 250px;
-    height: 250px;
-    margin-left: 95px;
-    
+.bi-gear-fill {
+    color: #e6967b;
 }
 
+#listaShow {
+    position: absolute;
+    top: 45;
+    right: 45;
+}
+
+#listaShow li {
+    border: 1px solid #e6967b;
+    display: inline-block;
+    color: #e6967b;
+    width: 100%;
+    padding: 5px;
+
+}
+
+#listaShow li:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #e6967b;
+}
+
+#listaShow .in {
+    transition: linear ease-in;
+}
+
+.container {
+    margin-top: 35px !important;
+}
+
+.col {
+    color: #e6967b;
+}
+
+.rotado {
+    animation-name: girar;
+    animation-duration: 3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    } 
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.vueltaRotado {
+    animation-name: girarAlReves;
+    animation-duration: 2000ms;
+    animation-timing-function: linear;
+}
+
+@keyframes girarAlReves {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

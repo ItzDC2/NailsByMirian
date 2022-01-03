@@ -18,16 +18,16 @@
         <title>Login</title>
     </head>
     <body>
-        <div id="ErrorLogin" class="col s12 card-panel center-align hoverable" style="border: 1px solid red; margin: 15px 15px;">
-            <p>
-                ¡Ya has iniciado sesión!
-            </p>
-            <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index.php'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
-        </div>
-        <div id="divAbajo" class="col s6 card-panel hoverable" onclick="window.location.href='php/logout.php'">
-            <p>
-                Cerrar Sesión
-            </p>
+        <div class="container">
+            <div id="ErrorLogin" class="col s12 card-panel center-align hoverable" style="border: 1px solid red; margin: 15px 15px;">
+                <p>
+                    ¡Ya has iniciado sesión!
+                </p>
+                <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index.php'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                <p id="comentarioVolver">
+                    O si quieres, dale click <a href="php/logout.php">aquí</a> para cerrar sesión.
+                </p>
+            </div>
         </div>
     </body>
     </html>

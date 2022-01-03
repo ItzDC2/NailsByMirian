@@ -2,13 +2,11 @@
 
     error_reporting(0);
 
-    global $nombre;
-    global $apellidos;
-    global $email;
-    global $contra;
-    global $contra2;
-
-    global $logueado;
+    $nombre;
+    $apellidos;
+    $email;
+    $contra;
+    $contra2;
 
     $errorUsuario = "";
     $errorPass = "";
