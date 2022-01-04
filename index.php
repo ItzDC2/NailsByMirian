@@ -23,7 +23,7 @@ session_start();
     <img src="imgs/nail.jpg" id="logo">
     <div class="navegacion">
         <ul type="none">
-            <li><a href="#">Pide Cita</a></li>
+            <li><a href="cita.php">Pide Cita</a></li>
             <li><a href="#">Contáctanos</a></li>
             <li><a href="#">Conócenos</a></li>
             <?php
