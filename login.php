@@ -51,7 +51,7 @@
     <script src="js/scroll.js"></script>
     <title>Login</title>
 </head>
-<body>
+<body onload="scroll()">
     <a href="index.php" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
     <br>
     <div id="loginPanel" class="col s6 offset-s3 card-panel hoverable">
