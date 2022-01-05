@@ -92,7 +92,7 @@ if (!$_SESSION['logueado']) {
                     $_SESSION['nombre'] = $nombre;
                     // $_SESSION['nombre'] = substr($linea['nombre'], 6, strlen($linea['nombre']))
                 ?>
-                    <!-- <script>
+                    <script>
                         var tiempoRestante = 10;
                         var tiempoDescarga = setInterval(function() {
                             document.getElementById("tiempo").textContent = tiempoRestante;
@@ -107,7 +107,7 @@ if (!$_SESSION['logueado']) {
                             }
                             tiempoRestante--;
                         }, 1000);
-                    </script> -->
+                    </script>
                     <div class="progress col s6 offset-s3" style="width: 50%">
                         <div class="determinate" id="progreso" style="background-color: #0075ff;"></div>
                     </div>

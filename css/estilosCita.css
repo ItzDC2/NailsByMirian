@@ -23,3 +23,13 @@ h3 {
     font-size: 2em !important;
     color: #e6967b;
 }
+
+.picker__date-display {
+    background-color: #e6967b;
+  }
+  .picker__weekday-display {
+    background-color: #e6967b;
+  }
+  .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+    background-color: #e6967b;
+  }
