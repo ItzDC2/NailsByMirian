@@ -33,12 +33,12 @@ session_start();
             <form action="php/cita_auth.php" id="formCita" class="col s12" method="post" onsubmit="window.location.href='php/cita_auth.php'">
                 <div class="row">
                     <div class="col s6">
-                        <label for="citaFecha">Escoja la fecha de su cita <i class="bi bi-calendar-date-fill"></i></label>
-                        <input type="text" name="citaFecha" id="citaFechaI" class="datepicker" placeholder="Haga click aquí">
+                        <label for="citaFechaI">Escoja la fecha de su cita <i class="bi bi-calendar-date-fill"></i></label>
+                        <input type="text" name="citaFechaI" id="citaFechaI" class="datepicker" placeholder="Haga click aquí" required>
                     </div>
                     <div class="col s6">
-                        <label for="citaFecha">Escoja la hora de su cita <i class="bi bi-clock-fill"></i></label>
-                        <input type="text" name="citaFecha" id="citaFechaI" class="timepicker" placeholder="Haga click aquí">
+                        <label for="citaHoraI">Escoja la hora de su cita <i class="bi bi-clock-fill"></i></label>
+                        <input type="text" name="citaHoraI" id="citaHoraI" class="timepicker" placeholder="Haga click aquí" required>
                     </div>
                 </div>
             </form>

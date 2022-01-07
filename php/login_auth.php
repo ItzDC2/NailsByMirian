@@ -6,14 +6,12 @@ require_once("config.php");
 
 session_start();
 
-function escribirError($error)
-{
+function escribirError($error) {
     $ruta = "../js/json/archivoErrorL.json";
     file_put_contents($ruta, json_encode($error), true);
 }
 
-function sanitizar($bd, $datos)
-{
+function sanitizar($bd, $datos) {
     return mysqli_real_escape_string($bd, $datos);
 }
 
