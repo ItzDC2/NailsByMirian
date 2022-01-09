@@ -4,11 +4,6 @@ html {
     box-sizing: border-box;
 }
 
-body {
-    background: linear-gradient();
-    transition: linear ease-in 2s;
-}
-
 #logo {
     display: block;
     text-align: center;

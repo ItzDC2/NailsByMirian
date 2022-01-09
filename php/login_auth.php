@@ -66,9 +66,6 @@ if (!$_SESSION['logueado']) {
 
     <body onload="progress()">
         <a href="../index.php" class="alogo"><img src="../imgs/nail.jpg" id="logo"></a>
-        <script>
-
-        </script>
         <div class="row">
             <div id="comentarioPHP" class="col s6 offset-s3 card-panel center-align">
                 <p>

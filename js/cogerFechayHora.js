@@ -29,7 +29,7 @@ $(document).ready(function() {
         defaultTime: 'now',
         showClearBtn: true,
         twelveHour: true,
-        autoClose: true,
+        autoClose: false,
         vibrate: true,
         i18n: {
            cancel: 'Cancelar',

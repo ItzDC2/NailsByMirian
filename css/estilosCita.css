@@ -1,35 +1,120 @@
+#logoDiv {
+  text-align: center;
+}
+
 #logo {
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 240px;
-    height: 240px;
-    padding: 0;
-    margin-bottom: -5px;
-    transform: scale(1);
-    transition: linear 1s;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  width: 240px;
+  height: 240px;
+  padding: 0;
+  margin-bottom: -5px;
+  transform: scale(1);
+  transition: linear 1s;
 }
 
 #logo:hover {
-    transform: scale(1.4);
-    transition: linear 1s;
+  transform: scale(1.4);
+  transition: linear 1s;
 }
 
 .container {
-    margin-top: 55px;
+  margin-top: 55px;
 }
 
 h3 {
-    font-size: 2em !important;
-    color: #e6967b;
+  font-size: 2em !important;
+  color: #e6967b;
 }
 
-.picker__date-display {
-    background-color: #e6967b;
-  }
-  .picker__weekday-display {
-    background-color: #e6967b;
-  }
-  .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
-    background-color: #e6967b;
-  }
+#enviarCitaDiv {
+  text-align: center;
+}
+
+#enviarCita {
+  margin-top: 25px;
+  display: inline-block;
+  width: 25%;
+}
+
+input:focus + label {
+  color: #e6967b !important;
+}
+
+input:focus {
+  border-bottom: 1px solid #e6967b !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.waves-effect {
+  box-shadow: 1.5px 0 4px rgba(0,0,0,0.2);
+  font-size: 1.3em;
+  text-transform: bold;
+  padding: 10px;
+  text-decoration: none;
+  color: #e6967b !important;
+  background-color: #fff !important;
+  margin-left: 5px;
+}
+
+.waves-effect:hover {
+  color: white !important;
+  background-color: #e6967b !important;
+}
+
+.is-today {
+  color: #e6967b !important;
+  text-decoration: underline;
+}
+
+.is-selected[aria-selected="true"] {
+  color: white !important;
+  background: #e6967b !important;
+}
+
+.datepicker-day-button:hover {
+  color: white !important;
+  background-color:rgba(230, 150, 123, 0.2) !important;
+}
+
+.datepicker-date-display {
+  background-color: #e6967b !important;
+}
+
+.datepicker-day-button[aria-selected="true"] {
+  background-color: #e6967b !important;
+}
+
+.datepicker-cancel {
+  background-color: #e6967b;
+  color: white;
+}
+
+.timepicker-display-column {
+  background-color: #e6967b !important;
+}
+
+.timepicker-digital-display {
+  background-color: #e6967b !important;
+}
+
+.timepicker-tick {
+  color: white;
+}
+
+.timepicker-tick:hover {
+  background-color:rgba(230, 150, 123, 0.2) !important;
+}
+
+.timepicker-canvas-bg {
+  fill: #e6967b !important;
+}
+
+.timepicker-canvas-bearing {
+  fill:#e6967b !important;
+}
+
+.timepicker-canvas line {
+  stroke: #e6967b !important;
+}
