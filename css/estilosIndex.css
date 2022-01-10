@@ -66,6 +66,18 @@ ul li a:hover {
     color: white;
 }
 
+#notificaciones {
+    position: absolute;
+    top: 25;
+    right: 75;
+    font-size: 1.5em;
+}
+
+#notificaciones:hover {
+    cursor:pointer;
+    color: #e6967b;
+}
+
 #divCS {
     position: absolute;
     top: 10;
@@ -90,7 +102,7 @@ ul li a:hover {
 
 #listaShow {
     position: absolute;
-    top: 45;
+    top: 55;
     right: 45;
 }
 

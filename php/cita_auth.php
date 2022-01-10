@@ -3,7 +3,7 @@
 $exito = false;
 $comentarioCita = "";
 
-require_once("./config.php");
+require("./config.php");
 
 session_start();
 
@@ -39,10 +39,9 @@ function formatearSQLHora($hora) {
 
 function estaOkFecha($fecha) {
     date_default_timezone_set('Atlantic/Canary');
-    $resultado = false;
     $fecha = strtotime($fecha);
-    $fecha = date('d-m-Y', $fecha);
-    $fechaHoy = date('d-m-Y');
+    $fecha = date('Y-m-d', $fecha);
+    $fechaHoy = date('Y-m-d');
     if ($fecha >= $fechaHoy) {
         $resultado = true;
     } else {
@@ -51,6 +50,27 @@ function estaOkFecha($fecha) {
         escribirComentarioCita($comentarioCita);
     }
     return $resultado;
+}
+
+function insertarCita($bd, $email, $fechaCita, $horaCita) {
+    $query = "INSERT INTO Citas (Email, FechaCita, HoraCita) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "')";
+    $resultado = $bd->query($query);
+    if(!$resultado) {
+        $comentarioCita = "<p>Ha habido un error ejecutando la consulta, por favor, inténtelo más tarde.</p>";
+        escribirComentarioCita($comentarioCita);
+    }
+}
+
+function comprobarCita($bd, $sql) {
+    if($resultadoC = mysqli_query($bd, $sql)) {
+        $lineas = mysqli_num_rows($resultadoC);
+        if($lineas == 0) {
+            $resultado = true;
+        } else {
+            $resultado = false;
+        }
+        return $resultado;
+    }
 }
 
 function estaOkHora($hora) {
@@ -84,30 +104,28 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
         $_SESSION['horaCita'] = sanitizar2($_SESSION['horaCita']);
         $_SESSION['horaCita'] = stripslashes($_SESSION['horaCita']);
     
-            $email = $_SESSION['Email'];
-            $fechaCita = formatearSQLFecha($_SESSION['fechaCita']);
-            $horaCita = formatearSQLHora($_SESSION['horaCita']);
-    
-            $sqlComprobar = "SELECT * FROM Citas WHERE FechaCita = " . entrecomillar($fechaCita) . "AND HoraCita = " . entrecomillar($horaCita);
-            $resultadoComprobar = $bd->query($sqlComprobar);
-            $lineas = mysqli_num_rows($resultadoComprobar);
-    
-            if ($lineas <= 0) {
-                $sqlCitaInsert = "INSERT INTO Citas (Email, FechaCita, HoraCita) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "')";
-                $resultadoCita = $bd->query($sqlCitaInsert) or die(mysqli_error($bd));
-                $lineasCitaInsert = mysqli_num_rows($resultadoCita);
-                if($lineasCitaInsert != 0) {
-                    $exito = true;
-                } else {
-                    $comentarioCita = "<p>Ha habido un error ejecutando la sentencia</p><p>". $sqlCitaInsert . "</p><p>Error: " . mysqli_error($bd) ."</p>";
-                    escribirComentarioCita($comentarioCita);
-                    $exito = false;
-                }
-            } else {
-                $comentarioCita = "<p>Ya existe una cita a esa hora y ese día, por favor, elija otra hora o día.</p>";
-                escribirComentarioCita($comentarioCita);
-                $exito = false;
+        $email = $_SESSION['Email'];
+        $fechaCitaF = formatearSQLFecha($_SESSION['fechaCita']);
+        $horaCitaF = formatearSQLHora($_SESSION['horaCita']);
+
+        $sqlComprobar = "SELECT * FROM Citas WHERE FechaCita = " . entrecomillar($fechaCitaF) . " AND HoraCita = " . entrecomillar($horaCitaF);
+        $citaComprobada = false;
+        if(comprobarCita($bd, $sqlComprobar)) {
+            $lineasComprobar = mysqli_num_rows(mysqli_query($bd, $sqlComprobar));
+            $citaComprobada = true;
         }
+        if($citaComprobada) {
+            insertarCita($bd, $email, $fechaCitaF, $horaCitaF);
+            $exito = true;
+        } else {
+            $comentarioCita = "<p>Ya existe una cita en ese día, por favor, elija otro día o consulte a su manicurista por una prolongación de tiempo para su cita.</p>";
+            escribirComentarioCita($comentarioCita);
+            $exito = false;
+        }
+    // } else {
+    //     $comentarioCita = "<p>Hubo un error con la fecha y hora de la cita, vuelva a intentarlo más tarde. " . $_SESSION['fechaCita'] . " " . $_SESSION['horaCita'] . "</p>";
+    //     escribirComentarioCita($comentarioCita);
+    //     $exito = false;
     }
 } else {
     $comentarioCita = "<p>Se debe elegir fecha y hora para poder tramitar la cita.</p>";
@@ -136,6 +154,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
     <?php
     if ($exito) {
     ?>
+    <div class="container">
         <div id="comentarioOk" class="col s6 card-panel center-align" style="margin-top: 25px;">
             <span id="texto">¡Todo ha ido bien <?php echo $_SESSION['nombre'] ?>!<br>
                 Tu cita para el día <b><?php echo $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']?></b> <?php echo "se ha registrado correctamente!" ?>
@@ -151,7 +170,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     }
                     if (tiempoRestante == 0) {
                         document.getElementById("texto").textContent = "Redireccionando..."
-                        // window.location.href = "../index.php"
+                        window.location.href = "../index.php"
                         clearInterval(tiempoDescarga)
                     }
                     tiempoRestante--;
@@ -168,6 +187,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                 </div>
             </div>
             <!-- </div> -->
+            </div>
         <?php
     } else {
         ?>
@@ -180,7 +200,6 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     if(!empty($comentarioCitaLocal)) {
                         $comentarioCita = $comentarioCitaLocal;
                         echo $comentarioCita;
-                        echo mysqli_error($bd);
                     }
                     // echo decodificarError($comentarioCita);
                     ?>
@@ -193,6 +212,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
             </div>
         <?php
     }
+    mysqli_close($bd);
         ?>
 </body>
 </html>

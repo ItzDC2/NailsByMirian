@@ -48,6 +48,7 @@ session_start();
                     <ul type="none" id="listaShow" style="visibility: hidden;">
                         <li onclick="window.location.href='php/logout.php'">Cerrar Sesión</li>
                     </ul>
+                    <i class="bi bi-bell" id="notificaciones" onclick="showNotificaciones()"></i>
                 </div>
             <?php
             }
