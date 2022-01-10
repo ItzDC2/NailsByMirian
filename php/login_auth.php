@@ -15,8 +15,7 @@ function sanitizar($bd, $datos) {
     return mysqli_real_escape_string($bd, $datos);
 }
 
-function sanitizar2($datos)
-{
+function sanitizar2($datos) {
     return htmlspecialchars($datos);
 }
 
@@ -85,6 +84,7 @@ if (!$_SESSION['logueado']) {
                         }
                     }
                     $_SESSION['nombre'] = $nombre;
+                    $_SESSION['Email'] = $email;
                     // $_SESSION['nombre'] = substr($linea['nombre'], 6, strlen($linea['nombre']))
                 ?>
                     <script>
@@ -126,14 +126,10 @@ if (!$_SESSION['logueado']) {
                     Error: <br>
                     <?php
                     $comentarioLocal = json_decode(file_get_contents("../js/json/archivoErrorL.json"), true);
-                    if (empty($comentarioLocal)) {
-                        //nada pasa...
-                    } else {
+                    if (!empty($comentarioLocal)) {
                         $comentarioError = $comentarioLocal;
                         echo $comentarioError;
                     }
-
-
                     ?>
                 </p>
                 <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../login.php'">Volver <i class="bi bi-box-arrow-in-left"></i></button>

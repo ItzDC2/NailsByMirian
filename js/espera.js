@@ -1,5 +1,4 @@
 function espera() {
-    console.log("Funciona")
     var tiempoRestante = 3;
     var tiempoDescarga = setInterval(function() {
         tiempoRestante--;

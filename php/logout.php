@@ -25,7 +25,7 @@ if(session_destroy()) {
         <p>
             Has cerrado sesión correctamente.
         </p>
-        <button type="submit" class="btn waves-effect" id="aceptarLogout" onclick="window.location.href='../index.php'" style="padding: 5px; width: 25%; text-transform: uppercase">Aceptar <i class="bi bi-box-arrow-in-left"></i></button>
+        <button type="submit" class="btn waves-effect" onclick="window.location.href='../index.php'">ACEPTAR <i class="bi bi-box-arrow-in-left"></i></i></button>
     </div>
 </body>
 

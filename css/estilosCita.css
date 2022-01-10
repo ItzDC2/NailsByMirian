@@ -38,8 +38,18 @@ h3 {
   width: 25%;
 }
 
+input:hover {
+  border-bottom: 1px solid #e6967b !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
 input:focus + label {
   color: #e6967b !important;
+}
+
+label::before {
+  content: "* ";
+  color: red;
 }
 
 input:focus {

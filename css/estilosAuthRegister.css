@@ -35,7 +35,8 @@ body {
 }
 
 .waves-effect {
-    background-color: #e6967b;
+    background-color: #e6967b !important;
+    color: white !important;
 }
 
 button:hover {

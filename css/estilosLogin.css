@@ -21,7 +21,7 @@ h2 {
 
 }
 
-.input-field input:focus + label {
+.input-field input:focus+label {
     color: #e6967b !important;
 }
 
@@ -39,11 +39,12 @@ button {
 }
 
 button:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .waves-effect {
     background-color: #e6967b !important;
+    color: white !important;
 }
 
 a.alogo {
@@ -66,6 +67,19 @@ p a:active, p a:link, p a:hover, p a:focus, p a {
     color: #e6967b;
 }
 
-#aceptarLogout {
-
-}
+/* #aceptarLogout {
+    box-shadow: 1.5px 0 4px rgba(0,0,0,0.2);
+    font-size: 1.3em;
+    text-transform: bold;
+    padding: 10px;
+    width: 25%;
+    text-decoration: none;
+    color: #e6967b !important;
+    background-color: #fff !important;
+    margin-left: 5px;
+  }
+  
+#aceptarLogout:hover {
+    color: white !important;
+    background-color: #e6967b !important;
+  } */
