@@ -12,12 +12,44 @@
     $errorPass = "";
     $comentario = "";
 
+    $_SESSION['notifi'] = array();
+
     function imprimirAConsola($salida, $con_tags_de_scripts = true) {
         $js_code = 'console.log(' . json_encode($salida, JSON_HEX_TAG) . ');';
         if($con_tags_de_scripts) {
             $js_code = '<script>' . $js_code . '</script>';
         }       
         echo $js_code; 
+    }
+
+    function sqlComprobarCita($bd, $fechaCita, $horaCita, $email) {
+        $query = "SELECT * FROM Citas WHERE FechaCita = " . entrecomillar($fechaCita) . " AND HoraCita = " . entrecomillar($horaCita) . " AND Email = " . entrecomillar($email);
+        $resultado = $bd->query($query);
+        $lineas = $resultado->num_rows;
+        if($lineas != 0) {
+            $hoy = date('Y-m-d');
+            $horaFin = strtotime("02:00 pm");
+            if($fechaCita == $hoy && $horaCita >= $horaFin) {
+                $queryDelete = "DELETE FROM Citas WHERE FechaCita = " . entrecomillar($fechaCita) . " AND HoraCita = " . entrecomillar($horaCita) . " AND Email = " . entrecomillar($email);
+                $resultadoDelete = $bd->query($queryDelete);
+                if($resultadoDelete) {
+                    unset($_SESSION['notifi'][1]);
+                }
+            } else if($fechaCita == $hoy && $horaCita < $horaFin) {
+                $queryComprobar = "SELECT * FROM Citas WHERE Email = "  . entrecomillar($email) . "";
+                $resultado = $bd->query($queryComprobar);
+                $lineas = $resultado->num_rows;
+                $fechaCitaL = "";
+                $horaCitaL = "";
+                if($lineas != 0) {
+                    while($linea = mysqli_fetch_assoc($resultado)) {
+                        $fechaCitaL = $linea['FechaCita'];
+                        $horaCitaL = $linea['HoraCita'];
+                    }
+                    $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . $fechaCitaL . " a las " . $horaCitaL."</p>";
+                }
+            }
+        }
     }
 
     define('BD_SRV', 'localhost');

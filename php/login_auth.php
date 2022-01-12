@@ -85,6 +85,18 @@ if (!$_SESSION['logueado']) {
                     }
                     $_SESSION['nombre'] = $nombre;
                     $_SESSION['Email'] = $email;
+                    $_SESSION['notifi'][2] = "¡Has iniciado sesión correctamente!";
+                    $query = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
+                    $resultadoQ = $bd->query($query);
+                    $lineas = $resultadoQ->num_rows;
+                    if($lineas != 0) {
+                        while($linea = mysqli_fetch_assoc($resultadoQ)) {
+                            $linea['FechaCita'] = $fechaCita;
+                            $linea['HoraCita'] = $horaCita;
+                        }
+                        if(!empty($fechaCita) && !empty($horaCita))
+                        sqlComprobarCita($bd, $fechaCita, $horaCita, $email);
+                    }
                     // $_SESSION['nombre'] = substr($linea['nombre'], 6, strlen($linea['nombre']))
                 ?>
                     <script>
@@ -97,7 +109,7 @@ if (!$_SESSION['logueado']) {
                             }
                             if (tiempoRestante == 0) {
                                 document.getElementById("texto").textContent = "Redireccionando..."
-                                window.location.href = "../index.php"
+                                // window.location.href = "../index.php"
                                 clearInterval(tiempoDescarga)
                             }
                             tiempoRestante--;
@@ -109,8 +121,8 @@ if (!$_SESSION['logueado']) {
                     <!-- <progress value=0 max=10 id="progreso" onload="progress()"></progress> -->
                     <div class="row">
                         <br>
-                        <div class="col s6 offset-s3">
-                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index.php'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
+                        <div class="col s6 offset-s3"> <!-- window.location.href='../index.php' -->
+                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
                         </div>
                     </div>
             </div>

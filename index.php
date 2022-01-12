@@ -22,10 +22,10 @@ session_start();
 <body>
     <img src="imgs/nail.jpg" id="logo">
     <div class="navegacion">
-        <ul type="none">
-            <li><a href="cita.php">Pide Cita</a></li>
-            <li><a href="#">Contáctanos</a></li>
-            <li><a href="#">Conócenos</a></li>
+        <ul type="none" id="enlaces">
+            <li class="hoverable"><a href="cita.php">Pide Cita</a></li>
+            <li class="hoverable"><a href="#">Contáctanos</a></li>
+            <li class="hoverable"><a href="#">Conócenos</a></li>
             <?php
             // session_start();
             $doc = "login.php";
@@ -34,26 +34,109 @@ session_start();
             } else {
                 echo "</ul>";
             ?>
-            <div class="container">
-                <div class="card-panel col s6 m6 center-align hoverable" id="comentarioNombre">
-                    <p>
-                        <?php
-                        echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!";
-                        ?>
-                    </p>
+                <div class="container">
+                    <div class="card-panel col s6 m6 center-align hoverable" id="comentarioNombre">
+                        <p>
+                            <?php
+                            echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!";
+                            ?>
+                        </p>
+                    </div>
                 </div>
-            </div>
                 <div id="divCS">
                     <i class="bi bi-gear" id="opciones" onclick="show()"></i>
-                    <ul type="none" id="listaShow" style="visibility: hidden;">
+                    <!-- <ul type="none" id="listaShow" style="visibility: hidden;">
                         <li onclick="window.location.href='php/logout.php'">Cerrar Sesión</li>
-                    </ul>
+                    </ul> -->
                     <i class="bi bi-bell" id="notificaciones" onclick="showNotificaciones()"></i>
+                    <span class="punto" id="puntoNotificaciones" onclick="showNotificaciones()"></span>
+                    <script>
+                        var clicks = 0;
+                        var clickeado;
+
+                        function showNotificaciones() {
+                            var punto = document.getElementById("puntoNotificaciones")
+                            var listaNotificaciones = document.getElementById("listaNot");
+                            var campana = document.getElementById("notificaciones");
+                            <?php
+                            if (!(empty($_SESSION['fechaCita'])) && !(empty($_SESSION['horaCita']))) {
+                            ?>
+                                if (clicks == 0) {
+                                    if (clickeado == true) {
+                                        punto.style.visibility = 'hidden'
+                                    } else {
+                                        punto.style.visibility = 'visible'
+                                    }
+                                    listaNotificaciones.style.visibility = 'hidden';
+                                    campana.className = "bi bi-bell"
+                                    clicks++;
+                                } else {
+                                    punto.style.visibility = 'hidden'
+                                    listaNotificaciones.style.visibility = 'visible';
+                                    campana.className = "bi bi-bell-fill seleccionado"
+                                    clickeado = true
+                                    clicks = 0;
+                                }
+                            <?php
+                            } else {
+                            ?>
+                                punto.style.visibility = 'hidden';
+                                listaNotificaciones.style.visibility = 'hidden';
+                                if (clicks == 0) {
+                                    listaNotificaciones.style.visibility = 'visible';
+                                    punto.style.visibility = 'hidden';
+                                    campana.className = "bi bi-bell-fill seleccionado"
+                                    clicks++;
+                                } else {
+                                    listaNotificaciones.style.visibility = 'hidden';
+                                    punto.style.visibility = 'hidden'
+                                    campana.className = "bi bi-bell"
+                                    clicks = 0;
+                                }
+                            <?php
+                            }
+                            ?>
+                        }
+                    </script>
                 </div>
-            <?php
-            }
-            ?>
-        </ul>
+                <ul class="collection with-header hoverable" id="listaNot">
+                    <li class="collection-header">
+                        <h4>Notificaciones</h4>
+                    </li>
+                    <?php
+                    if (empty($_SESSION['notifi'][1] && empty($_SESSION['notifi'][2]) && empty($_SESSION['notifi'][3]))) {
+                    ?>
+                        <li class="collection-item">No tienes notificaciones nuevas.</li>
+                        <?php
+                    } else {
+                        if (!empty($_SESSION['notifi'][0])) { ?>
+                          <li class="collection-item">
+                              <?php echo $_SESSION['notifi'][0]; 
+                              unset($_SESSION['notifi'][0]);
+                              ?>
+                          </li>
+                         <?php
+                        } else if(!empty($_SESSION['notifi'][1])) {
+                        ?> <li class="collection-item">
+                                 <?php echo $_SESSION['notifi'][1]; 
+                                    // unset($_SESSION['notifi'][1])
+                                 ?>
+                             </li>
+                        <?php
+                        } else if(!empty($_SESSION['notifi'][2])) {
+
+                        }
+                    }
+                        ?>
+                        </ul>
+                    
+                <ul class="collection" id="listaShow" style="visibility: hidden;">
+                    <li class="collection-item" onclick="window.location.href='php/logout.php'">Cerrar sesión</li>
+                </ul>
+        <?php
+                }
+            // }
+        ?>
         <div class="container">
             <div class="row">
                 <div class="card-panel col s12 m6 hoverable" id="col1">

@@ -75,17 +75,9 @@ function comprobarCita($bd, $sql) {
 
 function estaOkHora($hora) {
     date_default_timezone_set('Atlantic/Canary');
-    $resultado = false;
     $hora = date('H:i:s', strtotime($hora));
-    // $patronAM = '{12:\d\d\sAM}';
-    // if(preg_match($patronAM, $hora)) {
-    //     $horaC = new DateTime($hora);
-    //     $mins = $horaC->format('i');
-    //     $hora = date('12:$mins:s', $hora);
-    // } else {
-    //     $hora = date("H:i:s", strtotime($hora));
-    // }
-    if ($hora >= date('09:00') && $hora <= date('14:00')) {
+    $hoy = date('Y-m-d');
+    if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita'])) && $hora > date('H:i:s')) {
         $resultado = true;
     } else {
         $resultado = false;
@@ -157,9 +149,12 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
     <div class="container">
         <div id="comentarioOk" class="col s6 card-panel center-align" style="margin-top: 25px;">
             <span id="texto">¡Todo ha ido bien <?php echo $_SESSION['nombre'] ?>!<br>
-                Tu cita para el día <b><?php echo $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']?></b> <?php echo "se ha registrado correctamente!" ?>
+                Tu cita para el día <b><?php echo $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']?></b> <?php echo "se ha registrado correctamente!";
+                $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']."</p>";
+
+                ?>
                 <br>
-                Serás redirigido a la pantalla inicial en <span id="tiempo"></span> <span id="secs">segundos...</span>
+                Serás redirigid@ a la pantalla inicial en <span id="tiempo"></span> <span id="secs">segundos...</span>
             </span>
             <script>
                 var tiempoRestante = 10;

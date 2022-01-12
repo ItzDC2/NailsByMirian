@@ -40,13 +40,13 @@ html {
     font-size: 1.5em;
 }
 
-ul {
+#enlaces {
     position: relative;
     text-align: center;
     margin: 0;
 }
 
-ul li {
+#enlaces li {
     display: inline-block;
 
 }
@@ -76,6 +76,20 @@ ul li a:hover {
 #notificaciones:hover {
     cursor:pointer;
     color: #e6967b;
+}
+
+#listaNot {
+    width: 25%;
+    border-radius: 15px;
+    position: absolute;
+    top: 25;
+    right: 150;
+    visibility: hidden;
+}
+
+#listaNot h4 {
+    font-size: 1.3em;
+    display: inline-block;
 }
 
 #divCS {
@@ -108,11 +122,133 @@ ul li a:hover {
 
 #listaShow li {
     border: 1px solid #e6967b;
-    display: inline-block;
+    display: block;
     color: #e6967b;
     width: 100%;
     padding: 5px;
 
+}
+
+.punto {
+    position: absolute;
+    animation: popup 0.7s;
+    top: 25;
+    right: 73;
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.punto:hover {
+    cursor:pointer;
+}
+
+.seleccionado {
+    animation: ring 4s .7s linear infinite;
+    transform-origin: 50% 4px;
+    animation-timing-function: linear;
+    color: #e6967b;
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0);
+    }
+    1% {
+        transform: rotate(30deg);
+    }
+    3% {
+        transform: rotate(-28deg);
+    }
+    5% {
+        transform: rotate(34deg);
+    }
+    7% {
+        transform: rotate(-32deg);
+    }
+    9% {
+        transform: rotate(30deg);
+    }
+    11% {
+        transform: rotate(-28deg);
+    }
+    13% {
+        transform: rotate(26deg);
+    }
+    15% {
+        transform: rotate(-24deg);
+    }
+    17% {
+        transform: rotate(22deg);
+    }
+    19% {
+        transform: rotate(-20deg);
+    }
+    21% {
+        transform: rotate(18deg);
+    }
+    23% {
+        transform: rotate(-16deg);
+    }
+    25% {
+        transform: rotate(14deg);
+    }
+    27% {
+        transform: rotate(-12deg);
+    }
+    29% {
+        transform: rotate(10deg);
+    }
+    31% {
+        transform: rotate(-8deg);
+    }
+    33% {
+        transform: rotate(6deg);
+    }
+    35% {
+        transform: rotate(-4deg);
+    }
+    37% {
+        transform: rotate(2deg);
+    }
+    39% {
+        transform: rotate(-1deg);
+    }
+    41% {
+        transform: rotate(1deg);
+    }
+    43% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    80% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 #listaShow li:hover {

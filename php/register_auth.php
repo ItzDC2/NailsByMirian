@@ -77,7 +77,6 @@ function escribirComentario($comentario) {
                             if ($resultado) {
                                 $exito = true;
                                 $_SESSION['logueado'] = true;
-                                $_SESSION['nombre'] = $nombre;
                                 $_SESSION['email'] = $email;
                                 $comentario = "<p>¡Te has registrado correctamente!</p>";
                                 escribirComentario($comentario);
@@ -134,6 +133,7 @@ function escribirComentario($comentario) {
             if ($exito) {
                 $_SESSION['nombre'] = $nombre;
                 $_SESSION['logueado'] = true;
+                $_SESSION['notifi'][0] = "<p>¡Te has registrado correctamente!</p>";
             ?>
                 <script>
                     var tiempoRestante = 10;
@@ -187,6 +187,7 @@ function escribirComentario($comentario) {
             <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../register.php'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
         </div>
     <?php
+            mysqli_close($bd);
             }
     ?>
     </div>
