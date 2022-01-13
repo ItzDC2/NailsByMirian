@@ -75,6 +75,24 @@ function comprobarCita($bd, $sql) {
 
 function estaOkHora($hora) {
     date_default_timezone_set('Atlantic/Canary');
+    $patron12 = '{12:\d\d\sAM}';
+    $patron1 = '{01:\d\d\sAM}';
+    $patron2 = '{02:\d\d\sAM}';
+    if(preg_match($patron1, $hora) || preg_match($patron2, $hora) || preg_match($patron12, $hora)) {
+        if(preg_match($patron1, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "01:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron2, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "02:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron12, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "12:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        }
+    }
     $hora = date('H:i:s', strtotime($hora));
     $hoy = date('Y-m-d');
     if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita'])) && $hora > date('H:i:s')) {

@@ -11,6 +11,17 @@ function escribirError($error) {
     file_put_contents($ruta, json_encode($error), true);
 }
 
+function estaOkEmail($email) {
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $resultado = false;
+        $comentario = "<p>Ha escrito un email el cual no está cumpliendo las reglas de seguridad.</p>";
+        escribirError($comentario);
+    } else {
+        $resultado = true;
+    }
+    return $resultado;
+}
+
 function sanitizar($bd, $datos) {
     return mysqli_real_escape_string($bd, $datos);
 }
@@ -25,20 +36,21 @@ $contra = md5($_REQUEST["iContra"]);
 if (!(empty($email) && !(empty($contra)))) {
     $email = sanitizar($bd, $email);
     $email = sanitizar2($email);
-    $email = stripslashes($email);
-    $contra = sanitizar($bd, $contra);
-    $contra = sanitizar2($contra);
-    $contra = stripslashes($contra);
-    $sql = "SELECT * FROM Usuarios WHERE email='$email' AND contra = '$contra'";
-    $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
-    $lineas = mysqli_num_rows($resultado);
-
-    if ($lineas != 0) {
-        $exito = true;
-    } else {
-        $comentario = "<p>Email o Contraseña Incorrectos</p>";
-        escribirError($comentario);
-        $exito = false;
+    if(estaOkEmail($email)) {
+        $contra = sanitizar($bd, $contra);
+        $contra = sanitizar2($contra);
+        $contra = stripslashes($contra);
+        $sql = "SELECT * FROM Usuarios WHERE email='$email' AND contra = '$contra'";
+        $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
+        $lineas = mysqli_num_rows($resultado);
+    
+        if ($lineas != 0) {
+            $exito = true;
+        } else {
+            $comentario = "<p>Email o Contraseña Incorrectos</p>";
+            escribirError($comentario);
+            $exito = false;
+        }
     }
 } else {
     $comentario = "<p>¡Todos los valores son necesarios!";
@@ -74,7 +86,6 @@ if (!$_SESSION['logueado']) {
                 <?php //Nombre: 
 
                 if ($exito) {
-                    session_start();
                     $_SESSION['logueado'] = true;
                     $nombreSQL = "SELECT Nombre FROM Usuarios WHERE Email='$email'";
                     $resultado = $bd->query($nombreSQL);
@@ -90,9 +101,9 @@ if (!$_SESSION['logueado']) {
                     $resultadoQ = $bd->query($query);
                     $lineas = $resultadoQ->num_rows;
                     if($lineas != 0) {
-                        while($linea = mysqli_fetch_assoc($resultadoQ)) {
-                            $linea['FechaCita'] = $fechaCita;
-                            $linea['HoraCita'] = $horaCita;
+                        while($lineasQuery = mysqli_fetch_assoc($resultadoQ)) {
+                            $fechaCita = $lineasQuery['FechaCita'];
+                            $horaCita = $lineasQuery['HoraCita'];
                         }
                         if(!empty($fechaCita) && !empty($horaCita))
                         sqlComprobarCita($bd, $fechaCita, $horaCita, $email);
@@ -109,7 +120,7 @@ if (!$_SESSION['logueado']) {
                             }
                             if (tiempoRestante == 0) {
                                 document.getElementById("texto").textContent = "Redireccionando..."
-                                // window.location.href = "../index.php"
+                                window.location.href = "../index.php"
                                 clearInterval(tiempoDescarga)
                             }
                             tiempoRestante--;
@@ -121,8 +132,8 @@ if (!$_SESSION['logueado']) {
                     <!-- <progress value=0 max=10 id="progreso" onload="progress()"></progress> -->
                     <div class="row">
                         <br>
-                        <div class="col s6 offset-s3"> <!-- window.location.href='../index.php' -->
-                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
+                        <div class="col s6 offset-s3">
+                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index.php'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
                         </div>
                     </div>
             </div>

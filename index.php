@@ -104,8 +104,12 @@ session_start();
                         <h4>Notificaciones</h4>
                     </li>
                     <?php
-                    if (empty($_SESSION['notifi'][1] && empty($_SESSION['notifi'][2]) && empty($_SESSION['notifi'][3]))) {
-                    ?>
+                    if (empty($_SESSION['notifi'][0]) && empty($_SESSION['notifi'][1]) && empty($_SESSION['notifi'][2])) {
+                    ?>  
+                        <script>
+                            var punto = document.getElementById("puntoNotificaciones")
+                            punto.style.visibility = 'hidden';
+                        </script>
                         <li class="collection-item">No tienes notificaciones nuevas.</li>
                         <?php
                     } else {
@@ -123,8 +127,12 @@ session_start();
                                  ?>
                              </li>
                         <?php
-                        } else if(!empty($_SESSION['notifi'][2])) {
-
+                        } else if(!empty($_SESSION['notifi'][2])) {?>
+                            <li class="collection-item">
+                                 <?php echo $_SESSION['notifi'][2]; 
+                                 ?>
+                             </li>
+                            <?php
                         }
                     }
                         ?>

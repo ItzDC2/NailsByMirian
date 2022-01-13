@@ -22,15 +22,15 @@
         echo $js_code; 
     }
 
-    function sqlComprobarCita($bd, $fechaCita, $horaCita, $email) {
-        $query = "SELECT * FROM Citas WHERE FechaCita = " . entrecomillar($fechaCita) . " AND HoraCita = " . entrecomillar($horaCita) . " AND Email = " . entrecomillar($email);
+    function sqlComprobarCita($bd, $fechaCita, $horaCita, $email) { 
+        $query = "SELECT * FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'";
         $resultado = $bd->query($query);
         $lineas = $resultado->num_rows;
         if($lineas != 0) {
             $hoy = date('Y-m-d');
             $horaFin = strtotime("02:00 pm");
             if($fechaCita == $hoy && $horaCita >= $horaFin) {
-                $queryDelete = "DELETE FROM Citas WHERE FechaCita = " . entrecomillar($fechaCita) . " AND HoraCita = " . entrecomillar($horaCita) . " AND Email = " . entrecomillar($email);
+                $queryDelete = "DELETE FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'" . " AND Email = '" . $email . "'";
                 $resultadoDelete = $bd->query($queryDelete);
                 if($resultadoDelete) {
                     unset($_SESSION['notifi'][1]);
