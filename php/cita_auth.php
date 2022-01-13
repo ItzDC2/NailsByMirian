@@ -75,6 +75,9 @@ function comprobarCita($bd, $sql) {
 
 function estaOkHora($hora) {
     date_default_timezone_set('Atlantic/Canary');
+    $patron9 = '{09:\d\d\sPM}';
+    $patron10 = '{10:\d\d\sPM}';
+    $patron11 = '{11:\d\d\sPM}';
     $patron12 = '{12:\d\d\sAM}';
     $patron1 = '{01:\d\d\sAM}';
     $patron2 = '{02:\d\d\sAM}';
@@ -91,12 +94,32 @@ function estaOkHora($hora) {
             $mins = date('i', strtotime($hora));
             $hora = "12:$mins PM";
             $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron9, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "09:$mins AM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron10, strtotime($hora))) {
+            $mins = date('i', strtotime($hora));
+            $hora = "10:$mins AM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron11, strtotime($hora))) {
+            $mins = date('i', strtotime($hora));
+            $hora = "11:$mins AM";
+            $_SESSION['horaCita'] = $hora;
         }
     }
     $hora = date('H:i:s', strtotime($hora));
     $hoy = date('Y-m-d');
     if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita'])) && $hora > date('H:i:s')) {
         $resultado = true;
+    } else if($hora > date('H:i:s') && $hoy <= formatearSQLFecha($_SESSION['fechaCita'])) {
+        $resultado = false;
+        $comentarioCita = "<p>La hora de la cita debe ser mayor a la hora actual.</p>";
+        escribirComentarioCita($comentarioCita);
+    } else if($hoy >= formatearSQLFecha($_SESSION['fechaCita'])) {
+        $resultado = false;
+        $comentarioCita = "<p>La fecha de la cita debe ser mayor a la fecha actual";
+        escribirComentarioCita($comentarioCita);
     } else {
         $resultado = false;
         $comentarioCita = "<p>La hora de la cita debe estar dentro de nuestros horarios laborales.</p>09:00 - 14:00";
@@ -212,7 +235,8 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     $comentarioCitaLocal = json_decode(file_get_contents($ruta), true);
                     if(!empty($comentarioCitaLocal)) {
                         $comentarioCita = $comentarioCitaLocal;
-                        echo $comentarioCita;
+                        echo $comentarioCita . '<br>';
+                        echo "Has escogido una cita a las " . $_SESSION['horaCita'] . " el día " . $_SESSION['fechaCita'];
                     }
                     // echo decodificarError($comentarioCita);
                     ?>
