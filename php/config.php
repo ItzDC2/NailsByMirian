@@ -28,7 +28,7 @@
         $lineas = $resultado->num_rows;
         if($lineas != 0) {
             $hoy = date('Y-m-d');
-            $horaFin = strtotime("02:00 pm");
+            $horaFin = "14:00";
             if($fechaCita == $hoy && $horaCita >= $horaFin) {
                 $queryDelete = "DELETE FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'" . " AND Email = '" . $email . "'";
                 $resultadoDelete = $bd->query($queryDelete);
@@ -36,18 +36,16 @@
                     unset($_SESSION['notifi'][1]);
                 }
             } else if($fechaCita == $hoy && $horaCita < $horaFin) {
-                $queryComprobar = "SELECT * FROM Citas WHERE Email = "  . entrecomillar($email) . "";
+                $queryComprobar = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
                 $resultado = $bd->query($queryComprobar);
                 $lineas = $resultado->num_rows;
-                $fechaCitaL = "";
-                $horaCitaL = "";
                 if($lineas != 0) {
                     while($linea = mysqli_fetch_assoc($resultado)) {
                         $fechaCitaL = $linea['FechaCita'];
                         $horaCitaL = $linea['HoraCita'];
                     }
-                    $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . $fechaCitaL . " a las " . $horaCitaL."</p>";
-                }
+                    $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . date('d-m-Y',  strtotime($fechaCita)) . " a las " . date('h:i ' . strtoupper('a'),  strtotime($horaCita)) ."</p>";               
+                 }
             }
         }
     }

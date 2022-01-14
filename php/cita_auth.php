@@ -75,10 +75,13 @@ function comprobarCita($bd, $sql) {
 
 function estaOkHora($hora) {
     date_default_timezone_set('Atlantic/Canary');
+    $patron9 = '{09:\d\d\sPM}';
+    $patron10 = '{10:\d\d\sPM}';
+    $patron11 = '{11:\d\d\sPM}';
     $patron12 = '{12:\d\d\sAM}';
     $patron1 = '{01:\d\d\sAM}';
     $patron2 = '{02:\d\d\sAM}';
-    if(preg_match($patron1, $hora) || preg_match($patron2, $hora) || preg_match($patron12, $hora)) {
+    if(preg_match($patron1, $hora) || preg_match($patron2, $hora) || preg_match($patron9, $hora) || preg_match($patron10, $hora) || preg_match($patron11, $hora) || preg_match($patron12, $hora))  {
         if(preg_match($patron1, $hora)) {
             $mins = date('i', strtotime($hora));
             $hora = "01:$mins PM";
@@ -90,6 +93,18 @@ function estaOkHora($hora) {
         } else if(preg_match($patron12, $hora)) {
             $mins = date('i', strtotime($hora));
             $hora = "12:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron9, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "09:$mins AM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron10, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "10:$mins AM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron11, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "11:$mins AM";
             $_SESSION['horaCita'] = $hora;
         }
     }
