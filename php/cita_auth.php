@@ -116,7 +116,7 @@ function estaOkHora($hora) {
     }
     $hora = date('H:i:s', strtotime($hora));
     $hoy = date('Y-m-d');
-    if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita'])) && $hora > date('H:i:s')) {
+    if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita']))) {
         $resultado = true;
     } else if($hora > date('H:i:s') && $hoy <= formatearSQLFecha($_SESSION['fechaCita'])) {
         $resultado = false;
