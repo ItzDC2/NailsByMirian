@@ -103,12 +103,6 @@ function estaOkHora($hora) {
             $hora = "10:$mins AM";
             $_SESSION['horaCita'] = $hora;
         } else if(preg_match($patron11, $hora)) {
-
-        } else if(preg_match($patron10, strtotime($hora))) {
-            $mins = date('i', strtotime($hora));
-            $hora = "10:$mins AM";
-            $_SESSION['horaCita'] = $hora;
-        } else if(preg_match($patron11, strtotime($hora))) {
             $mins = date('i', strtotime($hora));
             $hora = "11:$mins AM";
             $_SESSION['horaCita'] = $hora;

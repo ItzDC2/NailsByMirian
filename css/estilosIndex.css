@@ -30,12 +30,18 @@ html {
     line-height: auto;
     box-shadow: 1px 0 4px rgba(0,0,0,0.2);
     text-align: center;
+    color: #e6967b;
     
 }
 
 #panel:hover {
-    color: #e6967b;
+    color: white;
     cursor: pointer;
+    background-color: #e6967b;
+}
+
+object[type="text/html"] {
+    width: 75% !important;
 }
 
 #iconoPanel {

@@ -2,12 +2,26 @@ img {
     margin-bottom: -50px;
 }
 
+#cuerpo {
+    margin-top: 15px !important;
+    width: 96% !important;
+    border-radius: 10px;
+    height: 100% !important;
+}
+
+.title {
+    margin-top: 25px !important;
+    color: #e6967b;
+    margin-bottom: 25px;
+}
+
 #menuIcon {
-    position: relative;
-    margin-top: 25px;
-    margin-left: 25px;
+    position: absolute;
+    top: 25;
+    left: 50 !important;
     color: lightgray !important;
 }
+
 
 #menuIcon:hover {
     color: #e6967b !important;

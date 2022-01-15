@@ -44,7 +44,7 @@ session_start();
                     <script>
                         var panel = document.getElementById("panel");
                         panel.onclick = function() {
-                            window.location.href = "adm/adm.php";
+                            window.location.href = "b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64.php";
                         }
                     </script>
             <?php  
