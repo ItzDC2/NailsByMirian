@@ -28,14 +28,13 @@
         $lineas = $resultado->num_rows;
         if($lineas != 0) {
             $hoy = date('Y-m-d');
-            $horaFin = "14:00";
-            if($fechaCita == $hoy && $horaCita >= $horaFin) {
+            if($fechaCita > $hoy) {
                 $queryDelete = "DELETE FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'" . " AND Email = '" . $email . "'";
                 $resultadoDelete = $bd->query($queryDelete);
                 if($resultadoDelete) {
                     unset($_SESSION['notifi'][1]);
                 }
-            } else if($fechaCita == $hoy && $horaCita < $horaFin) {
+            } else if($fechaCita <= $hoy) {
                 $queryComprobar = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
                 $resultado = $bd->query($queryComprobar);
                 $lineas = $resultado->num_rows;

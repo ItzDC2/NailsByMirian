@@ -1,0 +1,61 @@
+img {
+    margin-bottom: -50px;
+}
+
+#menuIcon {
+    position: relative;
+    margin-top: 25px;
+    margin-left: 25px;
+    color: lightgray !important;
+}
+
+#menuIcon:hover {
+    color: #e6967b !important;
+}
+
+#menuIcon:focus {
+    color:#e6967b !important;
+}
+
+.user-view {
+    padding: 2px !important;
+    margin: 0 !important;
+}
+
+.user-view:hover {
+    background-color: white;
+    color: black;
+}
+
+li {
+    display: block;
+    margin-left: 25px;
+    padding: 5px;
+    width: 75% !important;
+    border-radius: 5px;
+}
+
+li.usuarios:hover, li.citas:hover, li.alertas:hover, li.volver:hover {
+    background-color: lightgray !important;
+    color: #e6967b;
+    cursor: pointer;
+}
+
+p {
+    display: inline-blockS;
+    padding: 0;
+}
+
+p.nombre {
+    font-size: 1.5em;
+    color: black;
+    padding: 0;
+}
+
+p.email {
+    font-size: 0.9em;
+    padding: 0;
+    margin-top: -36px;
+    color: black;
+    font-weight: bold;
+}

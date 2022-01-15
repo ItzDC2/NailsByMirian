@@ -38,6 +38,11 @@ h3 {
   width: 25%;
 }
 
+h5 {
+  font-size: 0.9em !important;
+  color:#e6967b;
+}
+
 input:hover {
   border-bottom: 1px solid #e6967b !important;
   box-shadow: 0 0 0 0 !important;
@@ -99,6 +104,14 @@ input:focus {
 .datepicker-cancel {
   background-color: #e6967b;
   color: white;
+}
+
+.month-prev:focus {
+  background-color: #e6967b !important;
+}
+
+.month-next:focus {
+  background-color: #e6967b !important;
 }
 
 .timepicker-display-column {

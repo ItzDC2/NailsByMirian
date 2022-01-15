@@ -21,6 +21,27 @@ html {
     transition: linear 1s;
 }
 
+#panel {
+    position: absolute;
+    top: 25;
+    left: 25;
+    padding: 1%;
+    height: auto;
+    line-height: auto;
+    box-shadow: 1px 0 4px rgba(0,0,0,0.2);
+    text-align: center;
+    
+}
+
+#panel:hover {
+    color: #e6967b;
+    cursor: pointer;
+}
+
+#iconoPanel {
+    font-size: 1.5em;
+}
+
 .s6 {
     margin-right: 25px;
 }

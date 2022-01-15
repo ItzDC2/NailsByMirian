@@ -15,6 +15,7 @@ session_start();
     <link rel="icon" href="imgs/nail-circled.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <script src="js/show.js"></script>
     <title>MirianNails</title>
 </head>
@@ -33,6 +34,21 @@ session_start();
                 echo "<li><a href='$doc'>Inicia Sesión</a></li>";
             } else {
                 echo "</ul>";
+            ?>
+            <?php 
+                if($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email'] == 'donovancf12380@gmail.com') {
+                    ?>
+                    <div class="card-panel hoverable valign-wrapper" id="panel">
+                        <i class="material-icons" id="iconoPanel">admin_panel_settings</i> Panel de Administración  
+                    </div>
+                    <script>
+                        var panel = document.getElementById("panel");
+                        panel.onclick = function() {
+                            window.location.href = "adm/adm.php";
+                        }
+                    </script>
+            <?php  
+                }
             ?>
                 <div class="container">
                     <div class="card-panel col s6 m6 center-align hoverable" id="comentarioNombre">

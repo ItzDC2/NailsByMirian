@@ -32,7 +32,8 @@ session_start();
         <form action="php/cita_auth.php" id="formCita" class="col s12" method="post" onsubmit="window.location.href='php/cita_auth.php'">
             <div class="container">
                 <div class="card-panel col s12 center-align hoverable">
-                    <h3>Pide Cita Aquí <?php echo $_SESSION['nombre'] ?></h3>
+                    <h3>Pide Cita Aquí <?php echo ucfirst($_SESSION['nombre']) ?></h3>
+                    <h5><u>Nuestro horario laboral es de 09:00 a 14:00</u></h5>
                 </div>
                 <div class="row">
                     <div class="col s6">
