@@ -77,7 +77,7 @@ function escribirComentario($comentario) {
                             if ($resultado) {
                                 $exito = true;
                                 $_SESSION['logueado'] = true;
-                                $_SESSION['email'] = $email;
+                                $_SESSION['Email'] = $email;
                                 $comentario = "<p>¡Te has registrado correctamente!</p>";
                                 escribirComentario($comentario);
                             } else {

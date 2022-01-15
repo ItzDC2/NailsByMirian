@@ -35,10 +35,10 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
         <style>
             #tituloCitas {
                 color: #e6967b;
-                font-size: 1.5em;
+                font-size: 2em;
             }
         </style>
-        <div class="citasInfo" style="margin-left: 15px;">
+        <div class="citasInfo" style="margin-left: 15px; text-align: center;">
             <h1 id="tituloCitas"><i class="bi bi-calendar"></i> Citas</h1>
         <?php
             $queryCitas = "SELECT * FROM Citas";
@@ -46,23 +46,35 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                 if ($lineasResultadoCitas = $resultado->num_rows != 0) {
                     if ($lineasResultadoCitas == 1) {
                         $citas = "Hay un total de " . $lineasResultadoCitas . " cita.";
-                } else {
-                    $citas = "Hay un total de " . $lineasResultadoCitas . " citas.";
+                    } else {
+                        $citas = "Hay un total de " . $lineasResultadoCitas . " citas.";
                 }
                 ?>
                 <p><?php echo $citas ?></p>
                 <ul>
-    
+                <br>
                 <?php
                 while ($linea = mysqli_fetch_assoc($resultado)) {
-                    echo "<li>" . $linea['Email'] . "</li>";
-                    echo "<li><li>" . $linea['FechaCita'] . "</li></li>";
-                    echo "<li><li>" . $linea['HoraCita'] . "</li></li>";
-                }?>
+                    ?>
+                    <div class="container">
+                        <div class="card-panel col s6 offset-s3 hoverable">
+                            <?php 
+                            echo "<li>" . $linea['Email'] . "</li>";
+                            echo "<li><ul>";
+                            echo "<li>" . $linea['FechaCita'] . "</li>";
+                            echo "<li>" . $linea['HoraCita'] . "</li>";
+                            echo "</li></ul>"
+                            ?>
+                        </div>
+                    </div>
+                <?php     
+                }
+                ?>
                 </ul>
         </div>
             <?php
         }
+        mysqli_close($bd);
     }
     ?>
     </body>

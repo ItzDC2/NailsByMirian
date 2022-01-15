@@ -37,8 +37,10 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
         <?php
         if ($_SESSION['Email'] == 'mirianencandelaria@gmail.com') {
             $nombre = "Mirián";
+            $frase = "¡Bienvenida de nuevo Mirián!";
         } else if ($_SESSION['Email'] == 'donovancf12380@gmail.com') {
             $nombre = "Dónovan";
+            $frase = "¡Bienvenido de nuevo Dónovan!";
         }
         ?>
         <div id="cuerpo" class="card-panel hoverable col s10" style="margin: 0 auto;">
@@ -47,14 +49,14 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                 <div class="title col s6 offset-s3">
                     <h1>Panel de Administración</h1>
                     <div class="col s6 offset-s3 center-align" id="bienvenida" style="font-size: 1.2em; color: black;">
-                        ¡Bienvenid@ <?php echo $nombre ?>!
+                        <?php echo $frase ?>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div id="citasDiv">
+                <div id="citasDiv" style="height: 850px;">
                     <script> 
-                        document.getElementById("citasDiv").innerHTML = '<object type="text/html" data="citasAdm.php" style="min-width: 100%; min-height: 101%;"></object>'
+                        document.getElementById("citasDiv").innerHTML = '<object type="text/html" data="citasAdm.php" style="min-width: 100%; min-height: 100%;"></object>'
                     </script>
                 </div>
             </div>
