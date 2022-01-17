@@ -37,13 +37,26 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                 color: #e6967b;
                 font-size: 2em;
             }
+            .waves-effect {
+                background-color: #e6967b !important;
+                color: white !important;
+            }
+            .waves-effect:hover {
+                background-color: white !important;
+                color: #e6967b !important;
+            }
+            .waves-effect:focus {
+                background-color: white !important;
+                color: #e6967b !important;
+            }
         </style>
         <div class="citasInfo" style="margin-left: 15px; text-align: center;">
             <h1 id="tituloCitas"><i class="bi bi-calendar"></i> Citas</h1>
         <?php
             $queryCitas = "SELECT * FROM Citas";
             $resultado = $bd->query($queryCitas);
-                if ($lineasResultadoCitas = $resultado->num_rows != 0) {
+            $lineasResultadoCitas = $resultado->num_rows;
+                if ($lineasResultadoCitas != 0) {
                     if ($lineasResultadoCitas == 1) {
                         $citas = "Hay un total de " . $lineasResultadoCitas . " cita.";
                     } else {
@@ -51,20 +64,51 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                 }
                 ?>
                 <p><?php echo $citas ?></p>
-                <ul>
+                <ul type="none">
                 <br>
                 <?php
                 while ($linea = mysqli_fetch_assoc($resultado)) {
+                    $nombreQuery = "SELECT Nombre FROM Usuarios WHERE Email = " . "'" . $linea['Email'] . "'";
+                    $apellidosQuery = "SELECT Apellidos FROM Usuarios Where Email = " . "'" . $linea['Email'] . "'";
+                    $telefonoQuery = "SELECT Telefono FROM Usuarios WHERE Email = " . "'" . $linea['Email'] . "'";
+                    $fecha = date('d-m-Y', strtotime($linea['FechaCita']));
+                    $hora = date('H:i:s', strtotime($linea['HoraCita']));
+                    $email = $linea['Email'];
+                    $resultadoN = $bd->query($nombreQuery);
+                    if($lineas = $resultado->num_rows != 0) {
+                        while($linea = $resultadoN->fetch_assoc()) {
+                            $nombre = $linea['Nombre'];
+                        }
+                        $resultadoA = $bd->query($apellidosQuery);
+                        $lineasA = $resultadoA->num_rows;
+                        if($lineasA != 0) {
+                            while($lineaA = $resultadoA->fetch_assoc()) {
+                                $apellidos = $lineaA['Apellidos'];
+                            } 
+                        }
+                        $resultadoT = $bd->query($telefonoQuery);
+                        $lineasT = $resultadoT->num_rows;
+                        if($lineasT != 0) {
+                            while($lineaT = $resultadoT->fetch_assoc()) {
+                                $telefono = $lineaT['Telefono'];
+                            }
+                        }
+                    }
                     ?>
                     <div class="container">
                         <div class="card-panel col s6 offset-s3 hoverable">
                             <?php 
-                            echo "<li>" . $linea['Email'] . "</li>";
+                            echo "<li><i class='bi bi-person-circle'></i> " . $nombre . " " . $apellidos . "</li>";
+                            echo "<li><i class='bi bi-at'></i> " . $email . "</li>";
+                            echo "<li><i class='bi bi-telephone-fill'></i> " . $telefono . "</li>";
                             echo "<li><ul>";
-                            echo "<li>" . $linea['FechaCita'] . "</li>";
-                            echo "<li>" . $linea['HoraCita'] . "</li>";
+                            echo "<li><i class='bi bi-calendar-date-fill'></i> " . $fecha . "</li>";
+                            echo "<li><i class='bi bi-clock-fill'></i> " . $hora . "</li>";
                             echo "</li></ul>"
                             ?>
+                            <br>
+                            <button class="btn waves-effect">Modificar</button>
+                            <button class="btn waves-effect">Cancelar</button>
                         </div>
                     </div>
                 <?php     

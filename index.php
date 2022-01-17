@@ -44,7 +44,7 @@ session_start();
                     <script>
                         var panel = document.getElementById("panel");
                         panel.onclick = function() {
-                            window.location.href = "b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64.php";
+                            window.open("b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64.php", '_blank')
                         }
                     </script>
             <?php  
@@ -54,7 +54,7 @@ session_start();
                     <div class="card-panel col s6 m6 center-align hoverable" id="comentarioNombre">
                         <p>
                             <?php
-                            echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!";
+                            echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!"; 
                             ?>
                         </p>
                     </div>

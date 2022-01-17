@@ -66,6 +66,12 @@ require_once("php/config.php");
             </div>
             <div class="row">
                 <div class="input-field col s12">
+                    <input type="tel" id="iTelefono" name="iTelefono" required>
+                    <label for="iTelefono">Teléfono <i class="bi bi-telephone-fill"></i></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
                     <input id="iEmail" type="email" name="iEmail" required>
                     <label for="iEmail">Email <i class="bi bi-envelope"></i></label>
                 </div>

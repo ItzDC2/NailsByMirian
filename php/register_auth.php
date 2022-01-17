@@ -37,17 +37,27 @@ function escribirComentario($comentario) {
     file_put_contents($ruta, json_encode($comentario), true);
 }
 
+function estaOkTelefono($telefono) {
+    if(strlen($telefono) != 9 || !is_numeric($telefono)) {
+        $resultado = false;
+    } else {
+        $resultado = true;
+    }
+    return $resultado;
+}
+
     $exito = false;
 
     if(!$_SESSION['logueado']) {
         if (isset($_POST['regButton'])) {
-            $nombre = $_REQUEST["iNombre"];
+            $nombre = trim($_REQUEST["iNombre"], ' ');
             $apellidos = $_REQUEST["iApellidos"];
-            $email = $_REQUEST["iEmail"];
+            $email = trim($_REQUEST["iEmail"], ' ');
+            $telefono = trim($_REQUEST['iTelefono'], ' ');
             $contra = md5($_REQUEST["iContra"]);
             $contra2 = md5($_REQUEST["iContra2"]);
-            if (!empty($nombre) && !empty($apellidos) && !empty($email) && !empty($contra) && !empty($contra2)) {
-                if (estanOk($contra, $contra2)) {
+            if (!empty($nombre) && !empty($apellidos) && !empty($email) && !empty($telefono) && !empty($contra) && !empty($contra2)) {
+                if (estanOk($contra, $contra2) && estaOkTelefono($telefono)) {
                     $nombre = stripslashes($nombre);
                     $nombre = sanitizar($bd, $nombre);
                     $nombre = sanitizar2($nombre);
@@ -69,8 +79,8 @@ function escribirComentario($comentario) {
                         escribirComentario($comentario);
                     } else {
                             $fechaCrea = date("Y-m-d H:i:s");
-                            $sql = "INSERT INTO Usuarios (Nombre, Apellidos, Email, Contra, FechaCrea) VALUES" . " ('" . $nombre . "', '" .
-                                $apellidos . "'" . ", '" . $email . "', '" . $contra . "', '" . $fechaCrea . "');";
+                            $sql = "INSERT INTO Usuarios (Nombre, Apellidos, Email, Telefono, Contra, FechaCrea) VALUES" . " ('" . $nombre . "', '" .
+                                $apellidos . "'" . ", '" . $email . "', '" . $telefono . "', '" . $contra . "', '" . $fechaCrea . "');";
                 
                             $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
                 

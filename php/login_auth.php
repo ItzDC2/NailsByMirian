@@ -47,7 +47,7 @@ if (!(empty($email) && !(empty($contra)))) {
         if ($lineas != 0) {
             $exito = true;
         } else {
-            $comentario = "<p>Email o Contraseña Incorrectos</p>";
+            $comentario = "<p>El email o contraseña no existe o en su defecto son incorrectos.</p>";
             escribirError($comentario);
             $exito = false;
         }

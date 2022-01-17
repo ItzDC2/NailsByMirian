@@ -81,6 +81,10 @@ function estaOkHora($hora) {
     $patron12 = '{12:\d\d\sAM}';
     $patron1 = '{01:\d\d\sAM}';
     $patron2 = '{02:\d\d\sAM}';
+    $patron5 = '{05:\d\d\sAM}';
+    $patron6 = '{06:\d\d\sAM}';
+    $patron7 = '{07:\d\d\sAM}';
+    $patron8 = '{08:\d\d\sAM}';
     if(preg_match($patron1, $hora) || preg_match($patron2, $hora) || preg_match($patron9, $hora) || preg_match($patron10, $hora) || preg_match($patron11, $hora) || preg_match($patron12, $hora))  {
         if(preg_match($patron1, $hora)) {
             $mins = date('i', strtotime($hora));
@@ -106,11 +110,29 @@ function estaOkHora($hora) {
             $mins = date('i', strtotime($hora));
             $hora = "11:$mins AM";
             $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron5, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "05:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron6, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "06:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron7, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "07:$mins PM";
+            $_SESSION['horaCita'] = $hora;
+        } else if(preg_match($patron8, $hora)) {
+            $mins = date('i', strtotime($hora));
+            $hora = "08:$mins PM";
+            $_SESSION['horaCita'] = $hora;
         }
     }
     $hora = date('H:i:s', strtotime($hora));
     $hoy = date('Y-m-d');
     if ($hora >= date('09:00:00') && $hora <= date('14:00:00') && ($hoy <= formatearSQLFecha($_SESSION['fechaCita']))) {
+        $resultado = true;
+    } else if($hora >= date('17:00:00') && $hora <= date('20:00:00') && $hoy <= formatearSQLFecha($_SESSION['fechaCita'])) {
         $resultado = true;
     } else if($hora > date('H:i:s') && $hoy <= formatearSQLFecha($_SESSION['fechaCita'])) {
         $resultado = false;
