@@ -11,6 +11,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
     if ($resultado != false) {
         echo "Eres un poquillo espabilado, pero aquí gano yo.<br>";
         echo "Se ha guardado tu información.";
+        die();
     }
 } else {
 ?>
@@ -44,7 +45,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
         }
         ?>
         <div id="cuerpo" class="card-panel hoverable col s10" style="margin: 0 auto; overflow: auto; display: block;">
-            <a href="" class="sidenav-trigger" data-target="nav"><i class="material-icons" id="menuIcon">menu</i></a>
+            <a href="" class="sidenav-trigger" data-target="nav"><i class="bi bi-list-task" id="menuIcon"></i></a>
             <div class="row center-align">
                 <div class="title col s6 offset-s3">
                     <h1>Panel de Administración</h1>

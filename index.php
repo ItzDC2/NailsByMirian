@@ -35,11 +35,11 @@ session_start();
             } else {
                 echo "</ul>";
             ?>
-            <?php 
-                if($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email'] == 'donovancf12380@gmail.com') {
-                    ?>
-                    <div class="card-panel hoverable valign-wrapper" id="panel">
-                        <i class="material-icons" id="iconoPanel">admin_panel_settings</i> Panel de Administración  
+                <?php
+                if ($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email'] == 'donovancf12380@gmail.com') {
+                ?>
+                    <div class="card-panel hoverable valign-wrapper hoverable" id="panel">
+                        <i class="material-icons" id="iconoPanel">admin_panel_settings</i> Panel de Administración
                     </div>
                     <script>
                         var panel = document.getElementById("panel");
@@ -47,23 +47,20 @@ session_start();
                             window.open("b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64.php", '_blank')
                         }
                     </script>
-            <?php  
+                <?php
                 }
-            ?>
+                ?>
                 <div class="container">
                     <div class="card-panel col s6 m6 center-align hoverable" id="comentarioNombre">
                         <p>
                             <?php
-                            echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!"; 
+                            echo "¡Bienvenid@ " . $_SESSION['nombre'] . "!";
                             ?>
                         </p>
                     </div>
                 </div>
                 <div id="divCS">
                     <i class="bi bi-gear" id="opciones" onclick="show()"></i>
-                    <!-- <ul type="none" id="listaShow" style="visibility: hidden;">
-                        <li onclick="window.location.href='php/logout.php'">Cerrar Sesión</li>
-                    </ul> -->
                     <i class="bi bi-bell" id="notificaciones" onclick="showNotificaciones()"></i>
                     <span class="punto" id="puntoNotificaciones" onclick="showNotificaciones()"></span>
                     <script>
@@ -83,16 +80,17 @@ session_start();
                                     } else {
                                         punto.style.visibility = 'visible'
                                     }
-                                    listaNotificaciones.style.visibility = 'hidden';
-                                    campana.className = "bi bi-bell"
-                                    clicks++;
-                                } else {
                                     punto.style.visibility = 'hidden'
                                     listaNotificaciones.style.visibility = 'visible';
                                     campana.className = "bi bi-bell-fill seleccionado"
                                     clickeado = true
+                                    clicks++;
+                                } else {
+                                    listaNotificaciones.style.visibility = 'hidden';
+                                    campana.className = "bi bi-bell"
                                     clicks = 0;
                                 }
+                            }
                             <?php
                             } else {
                             ?>
@@ -109,104 +107,126 @@ session_start();
                                     campana.className = "bi bi-bell"
                                     clicks = 0;
                                 }
-                            <?php
+
                             }
-                            ?>
-                        }
+                        <?php
+                            }
+                        ?>
                     </script>
                 </div>
                 <ul class="collection with-header hoverable" id="listaNot">
                     <li class="collection-header">
                         <h4>Notificaciones</h4>
                     </li>
-                    <?php
-                    if (empty($_SESSION['notifi'][0]) && empty($_SESSION['notifi'][1]) && empty($_SESSION['notifi'][2])) {
-                    ?>  
-                        <script>
-                            var punto = document.getElementById("puntoNotificaciones")
-                            punto.style.visibility = 'hidden';
-                        </script>
-                        <li class="collection-item">No tienes notificaciones nuevas.</li>
-                        <?php
-                    } else {
-                        if (!empty($_SESSION['notifi'][0])) { ?>
-                          <li class="collection-item">
-                              <?php echo $_SESSION['notifi'][0]; 
-                              unset($_SESSION['notifi'][0]);
-                              ?>
-                          </li>
-                         <?php
-                        } else if(!empty($_SESSION['notifi'][1])) {
-                        ?> <li class="collection-item">
-                                 <?php echo $_SESSION['notifi'][1]; 
-                                    // unset($_SESSION['notifi'][1])
-                                 ?>
-                             </li>
-                        <?php
-                        } else if(!empty($_SESSION['notifi'][2])) {?>
-                            <li class="collection-item">
-                                 <?php echo $_SESSION['notifi'][2]; 
-                                 ?>
-                             </li>
-                            <?php
-                        }
-                    }
+                    <?php 
+                    if(!empty($_SESSION['notifi'][103])) {
                         ?>
-                        </ul>
-                    
+                        <li class="collection-item">
+                                <?php echo $_SESSION['notifi'][103]; 
+                                    unset($_SESSION['notifi'][103]);
+                                ?>
+                            </li>
+                        <?php 
+                    }
+                    if(!empty($_SESSION['notifi'][102])) {
+                        ?>
+                        <li class="collection-item">
+                                <?php echo $_SESSION['notifi'][102]; ?>
+                            </li>
+                        <?php 
+                    }
+                    ?>
+                    <?php
+                    $numerosCitaQuery = "SELECT NumeroCitas FROM Citas Where Email = '" . $_SESSION['Email'] . "'";
+                    $resultadoQueryNCita = $bd->query($numerosCitaQuery);
+                    $lineasNC = $resultadoQueryNCita->num_rows;
+                    if($lineasNC != 0) {
+                        while($linea = $resultadoQueryNCita->fetch_assoc()) {
+                            $nCitas = (int) $linea['NumeroCitas'];
+                        }
+                        $i = 0;
+                        while ($i < $nCitas) {
+                            $query = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
+                            $resultado = $bd->query($query);
+                            $lineas = $resultado->num_rows;
+                            if ($lineas != 0) { 
+                                while($linea = $resultado->fetch_assoc()) {
+                                    $fechaCita = $linea['FechaCita'];
+                                    $horaCita = $linea['HoraCita'];
+                                    $_SESSION['notifi'][$i] = "<p>Recordatorio: Tienes una cita el día " . date('d-m-Y', strtotime($fechaCita)) . " a las " . date('h:i ' . strtoupper('a'), strtotime($horaCita)) . "</p>";
+                                    ?>
+                                <li class="collection-item">
+                                    <?php 
+                                    echo $_SESSION['notifi'][$i];
+                                    ?>
+                                </li>
+                                <?php
+                                $i++;
+                                }
+                            } else if($lineas == 0) {
+                                    if($i == 10) { ?>
+                                    <li class="collection-item">
+                                        <?php echo "No tienes notificaciones nuevas."; ?>
+                                    </li>
+                                    <?php 
+                                    }
+                                }
+                            }
+                        }   
+                        ?>
+                </ul>
                 <ul class="collection" id="listaShow" style="visibility: hidden;">
                     <li class="collection-item" onclick="window.location.href='php/logout.php'">Cerrar sesión</li>
                 </ul>
-        <?php
-                }
-            // }
-        ?>
-        <div class="container">
-            <div class="row">
-                <div class="card-panel col s12 m6 hoverable" id="col1">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Omnis ut iure, ea, nisi sapiente dolorem facilis neque itaque
-                        ad tempora earum ex quidem. Dignissimos perspiciatis modi asperiores, suscipit minima maiores iure
-                        tempora esse. Animi, possimus mollitia labore dolor impedit temporibus ipsum hic neque cumque nesciunt
-                        debitis
-                        ea! Numquam, dolorum fugiat. 1
-                    </p>
+                <?php 
+            } //ciere del ELSE 
+                 ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="card-panel col s12 m6 hoverable" id="col1">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Omnis ut iure, ea, nisi sapiente dolorem facilis neque itaque
+                                ad tempora earum ex quidem. Dignissimos perspiciatis modi asperiores, suscipit minima maiores iure
+                                tempora esse. Animi, possimus mollitia labore dolor impedit temporibus ipsum hic neque cumque nesciunt
+                                debitis
+                                ea! Numquam, dolorum fugiat. 1
+                            </p>
+                        </div>
+                        <div class="card-panel col s12 m6 hoverable" id="col2">
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Nihil eligendi laudantium deleniti minima et quia ab reprehenderit
+                                vel maxime quibusdam voluptates dolorem amet culpa quos dolor quisquam,
+                                cum ex fugit repellendus autem maiores, iure molestias!
+                                Voluptates odio culpa illo at praesentium harum
+                                rerum blanditiis ipsam, porro omnis, quos doloremque inventore. 2
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-panel col s12 m6 hoverable" id="col3">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Omnis ut iure, ea, nisi sapiente dolorem facilis neque itaque
+                                ad tempora earum ex quidem. Dignissimos perspiciatis modi asperiores, suscipit minima maiores iure
+                                tempora esse. Animi, possimus mollitia labore dolor impedit temporibu ipsum hic neque cumque nesciunt
+                                debitis
+                                ea! Numquam, dolorum fugiat. 3
+                            </p>
+                        </div>
+                        <div class="card-panel col s12 m6 hoverable" id="col4">
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Nihil eligendi laudantium deleniti minima et quia ab reprehenderit
+                                vel maxime quibusdam voluptates dolorem amet culpa quos dolor quisquam,
+                                cum ex fugit repellendus autem maiores, iure molestias!
+                                Voluptates odio culpa illo at praesentium harum
+                                rerum blanditiis ipsam, porro omnis, quos doloremque inventore. 4
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-panel col s12 m6 hoverable" id="col2">
-                    <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Nihil eligendi laudantium deleniti minima et quia ab reprehenderit
-                        vel maxime quibusdam voluptates dolorem amet culpa quos dolor quisquam,
-                        cum ex fugit repellendus autem maiores, iure molestias!
-                        Voluptates odio culpa illo at praesentium harum
-                        rerum blanditiis ipsam, porro omnis, quos doloremque inventore. 2
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card-panel col s12 m6 hoverable" id="col3">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Omnis ut iure, ea, nisi sapiente dolorem facilis neque itaque
-                        ad tempora earum ex quidem. Dignissimos perspiciatis modi asperiores, suscipit minima maiores iure
-                        tempora esse. Animi, possimus mollitia labore dolor impedit temporibu ipsum hic neque cumque nesciunt
-                        debitis
-                        ea! Numquam, dolorum fugiat. 3
-                    </p>
-                </div>
-                <div class="card-panel col s12 m6 hoverable" id="col4">
-                    <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Nihil eligendi laudantium deleniti minima et quia ab reprehenderit
-                        vel maxime quibusdam voluptates dolorem amet culpa quos dolor quisquam,
-                        cum ex fugit repellendus autem maiores, iure molestias!
-                        Voluptates odio culpa illo at praesentium harum
-                        rerum blanditiis ipsam, porro omnis, quos doloremque inventore. 4
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 

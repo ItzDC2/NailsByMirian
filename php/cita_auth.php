@@ -9,6 +9,7 @@ session_start();
 
 $_SESSION['fechaCita'] = $_REQUEST['citaFechaI'];
 $_SESSION['horaCita'] = $_REQUEST['citaHoraI'];
+$_SESSION['Concepto'] = $_REQUEST['descripcionI'];
 
 function escribirComentarioCita($errorCita) {
     $ruta = "./json/errorCita.json";
@@ -52,8 +53,9 @@ function estaOkFecha($fecha) {
     return $resultado;
 }
 
-function insertarCita($bd, $email, $fechaCita, $horaCita) {
-    $query = "INSERT INTO Citas (Email, FechaCita, HoraCita) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "')";
+function insertarCita($bd, $email, $fechaCita, $horaCita, $concepto, $nCitas) {
+    $concepto = sanitizar($bd, $_SESSION['Concepto']);
+    $query = "INSERT INTO Citas (Email, FechaCita, HoraCita, Descripcion, NumeroCitas) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "', '" . $concepto  . "', '" . $nCitas . "')";
     $resultado = $bd->query($query);
     if(!$resultado) {
         $comentarioCita = "<p>Ha habido un error ejecutando la consulta, por favor, inténtelo más tarde.</p>";
@@ -85,7 +87,6 @@ function estaOkHora($hora) {
     $patron6 = '{06:\d\d\sAM}';
     $patron7 = '{07:\d\d\sAM}';
     $patron8 = '{08:\d\d\sAM}';
-    if(preg_match($patron1, $hora) || preg_match($patron2, $hora) || preg_match($patron9, $hora) || preg_match($patron10, $hora) || preg_match($patron11, $hora) || preg_match($patron12, $hora))  {
         if(preg_match($patron1, $hora)) {
             $mins = date('i', strtotime($hora));
             $hora = "01:$mins PM";
@@ -126,7 +127,6 @@ function estaOkHora($hora) {
             $mins = date('i', strtotime($hora));
             $hora = "08:$mins PM";
             $_SESSION['horaCita'] = $hora;
-        }
     }
     $hora = date('H:i:s', strtotime($hora));
     $hoy = date('Y-m-d');
@@ -170,7 +170,17 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
             $citaComprobada = true;
         }
         if($citaComprobada) {
-            insertarCita($bd, $email, $fechaCitaF, $horaCitaF);
+            $numerosCitaQuery = "SELECT NumeroCitas FROM Citas Where Email = '" . $email . "'";
+            $resultadoQueryNCita = $bd->query($numerosCitaQuery);
+            $lineasNC = $resultadoQueryNCita->num_rows;
+            if($lineasNC != 0) {
+                while($linea = $resultadoQueryNCita->fetch_assoc()) {
+                    $nCitas = (int) $linea['NumeroCitas'] + 1; 
+                }
+            } else {
+                $nCitas = "1";
+            }
+            insertarCita($bd, $email, $fechaCitaF, $horaCitaF, $concepto, $nCitas);
             $exito = true;
         } else {
             $comentarioCita = "<p>Ya existe una cita en ese día, por favor, elija otro día o consulte a su manicurista por una prolongación de tiempo para su cita.</p>";
@@ -213,8 +223,18 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
         <div id="comentarioOk" class="col s6 card-panel center-align" style="margin-top: 25px;">
             <span id="texto">¡Todo ha ido bien <?php echo $_SESSION['nombre'] ?>!<br>
                 Tu cita para el día <b><?php echo $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']?></b> <?php echo "se ha registrado correctamente!";
-                $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']."</p>";
-
+                // $_SESSION['notifi'][0] = "<p>Recordatorio: Tienes una cita el día " . $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']."</p>";
+                // $query = "SELECT * FROM Citas WHERE Email = '" . $email . "'";
+                // $resultado = $bd->query($query);
+                // $lineas = $resultado->num_rows;
+                // if($lineas != 0) {
+                //     while($lineas <= $nCitas) {
+                //         $fecha = "SELECT FechaCita FROM Citas WHERE Email = '" . $email . "'";
+                //         $hora = "SELECT HoraCita FROM Citas WHERE Email = '" . $email . "'";
+                //         $_SESSION['notifi']['$lineas'] = "<p>Recordatorio: Tienes una cita el día " . $fecha . " a las " . $hora . "</p>";
+                //         $lineas++;
+                //     }
+                // }
                 ?>
                 <br>
                 Serás redirigid@ a la pantalla inicial en <span id="tiempo"></span> <span id="secs">segundos...</span>

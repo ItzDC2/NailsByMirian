@@ -10,6 +10,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
     if ($resultado != false) {
         echo "Eres un poquillo espabilado, pero aquí gano yo.<br>";
         echo "Se ha guardado tu información.";
+        die();
     }
 } else {
 ?>

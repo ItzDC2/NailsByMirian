@@ -19,6 +19,7 @@ img {
     position: absolute;
     top: 25;
     left: 50 !important;
+    font-size: 2em;
     color: lightgray !important;
 }
 

@@ -98,7 +98,7 @@ if (!$_SESSION['logueado']) {
                     }
                     $_SESSION['nombre'] = $nombre;
                     $_SESSION['Email'] = $email;
-                    $_SESSION['notifi'][2] = "¡Has iniciado sesión correctamente!";
+                    $_SESSION['notifi'][102] = "¡Has iniciado sesión correctamente!";
                     $query = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
                     $resultadoQ = $bd->query($query);
                     $lineas = $resultadoQ->num_rows;

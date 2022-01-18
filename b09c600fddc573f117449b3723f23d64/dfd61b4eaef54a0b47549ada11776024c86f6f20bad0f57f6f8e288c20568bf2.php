@@ -11,6 +11,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
     if ($resultado != false) {
         echo "Eres un poquillo espabilado, pero aquí gano yo.";
         echo "Se ha guardado tu información.";
+        die();
     }
 } else {
 ?>
@@ -56,7 +57,9 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
             $queryCitas = "SELECT * FROM Citas";
             $resultado = $bd->query($queryCitas);
             $lineasResultadoCitas = $resultado->num_rows;
-                if ($lineasResultadoCitas != 0) {
+                if ($lineasResultadoCitas == 0) {
+                    echo "No hay citas pendientes.";
+                } else {
                     if ($lineasResultadoCitas == 1) {
                         $citas = "Hay un total de " . $lineasResultadoCitas . " cita.";
                     } else {
@@ -71,6 +74,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                     $nombreQuery = "SELECT Nombre FROM Usuarios WHERE Email = " . "'" . $linea['Email'] . "'";
                     $apellidosQuery = "SELECT Apellidos FROM Usuarios Where Email = " . "'" . $linea['Email'] . "'";
                     $telefonoQuery = "SELECT Telefono FROM Usuarios WHERE Email = " . "'" . $linea['Email'] . "'";
+                    $concepto = "SELECT Descripcion FROM Citas WHERE Email = " . "'" . $linea['Email'] . "'";
                     $fecha = date('d-m-Y', strtotime($linea['FechaCita']));
                     $hora = date('H:i:s', strtotime($linea['HoraCita']));
                     $email = $linea['Email'];
@@ -93,6 +97,13 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                                 $telefono = $lineaT['Telefono'];
                             }
                         }
+                        $resultadoC = $bd->query($concepto);
+                        $lineasC = $resultado->num_rows;
+                        if($lineasC != 0) {
+                            while($lineaC = $resultadoC->fetch_assoc()) {
+                                $concepto = $lineaC['Descripcion'];
+                            }
+                        }
                     }
                     ?>
                     <div class="container">
@@ -104,7 +115,8 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                             echo "<li><ul>";
                             echo "<li><i class='bi bi-calendar-date-fill'></i> " . $fecha . "</li>";
                             echo "<li><i class='bi bi-clock-fill'></i> " . $hora . "</li>";
-                            echo "</li></ul>"
+                            echo "</li></ul>";
+                            echo "<li><i class='bi bi-card-text'></i> " . $concepto . "</li>";
                             ?>
                             <br>
                             <button class="btn waves-effect">Modificar</button>
