@@ -63,7 +63,7 @@ session_start();
                     <i class="bi bi-gear" id="opciones" onclick="show()"></i>
                     <i class="bi bi-bell" id="notificaciones" onclick="showNotificaciones()"></i>
                     <span class="punto" id="puntoNotificaciones" onclick="showNotificaciones()"></span>
-                    <script>
+                    <script type="text/javascript">
                         var clicks = 0;
                         var clickeado;
 
@@ -110,7 +110,7 @@ session_start();
 
                             }
                         <?php
-                            }
+                        }
                         ?>
                     </script>
                 </div>
