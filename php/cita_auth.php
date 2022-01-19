@@ -180,8 +180,14 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
             } else {
                 $nCitas = "1";
             }
-            insertarCita($bd, $email, $fechaCitaF, $horaCitaF, $concepto, $nCitas);
-            $exito = true;
+            if($nCitas > 10) {
+                insertarCita($bd, $email, $fechaCitaF, $horaCitaF, $concepto, $nCitas);
+                $exito = true;
+            } else {
+                $comentarioCita = "<p>Has excedido las solicitudes de citas, por favor, espere a que se le atienda.</p>";
+                escribirComentarioCita($comentarioCita);
+                $exito = false;
+            }
         } else {
             $comentarioCita = "<p>Ya existe una cita en ese día, por favor, elija otro día o consulte a su manicurista por una prolongación de tiempo para su cita.</p>";
             escribirComentarioCita($comentarioCita);

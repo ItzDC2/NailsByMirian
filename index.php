@@ -108,7 +108,7 @@ session_start();
                                     clicks = 0;
                                 }
 
-                            }
+                            } //Ignorar el error, VS lo lee como mal porque ya está cerrada la función.
                         <?php
                         }
                         ?>
@@ -140,7 +140,7 @@ session_start();
                     $numerosCitaQuery = "SELECT NumeroCitas FROM Citas Where Email = '" . $_SESSION['Email'] . "'";
                     $resultadoQueryNCita = $bd->query($numerosCitaQuery);
                     $lineasNC = $resultadoQueryNCita->num_rows;
-                    if($lineasNC != 0) {
+                    if($lineasNC != 0) { 
                         while($linea = $resultadoQueryNCita->fetch_assoc()) {
                             $nCitas = (int) $linea['NumeroCitas'];
                         }
@@ -163,17 +163,16 @@ session_start();
                                 <?php
                                 $i++;
                                 }
-                            } else if($lineas == 0) {
-                                    if($i == 10) { ?>
-                                    <li class="collection-item">
-                                        <?php echo "No tienes notificaciones nuevas."; ?>
-                                    </li>
-                                    <?php 
-                                    }
-                                }
                             }
-                        }   
-                        ?>
+                        }
+                    } else {
+                    ?>
+                    <li class="collection-item">
+                        <?php echo "No tienes notificaciones nuevas."; ?>
+                    </li>
+                    <?php 
+                    }
+                    ?>
                 </ul>
                 <ul class="collection" id="listaShow" style="visibility: hidden;">
                     <li class="collection-item" onclick="window.location.href='php/logout.php'">Cerrar sesión</li>
