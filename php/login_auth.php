@@ -107,8 +107,10 @@ if (!$_SESSION['logueado']) {
                             $fechaCita = $lineasQuery['FechaCita'];
                             $horaCita = $lineasQuery['HoraCita'];
                         }
-                        if(!empty($fechaCita) && !empty($horaCita))
-                        sqlComprobarCita($bd, $fechaCita, $horaCita, $email);
+                        if(!empty($fechaCita) && !empty($horaCita)) {
+                        // sqlComprobarCita($bd, $fechaCita, $horaCita, $email);
+                        }
+
                     }
                     // $_SESSION['nombre'] = substr($linea['nombre'], 6, strlen($linea['nombre']))
                 ?>

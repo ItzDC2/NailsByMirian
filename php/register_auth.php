@@ -38,7 +38,10 @@ function escribirComentario($comentario) {
 }
 
 function estaOkTelefono($telefono) {
+    $ruta = "../js/json/archivo.json";
     if(strlen($telefono) != 9 || !is_numeric($telefono)) {
+        $comentario = "<p>El teléfono no cumple los requisitos estándares de ser al menos 9 caracteres numéricos.</p>";
+        file_put_contents($ruta, json_encode($comentario), true);
         $resultado = false;
     } else {
         $resultado = true;

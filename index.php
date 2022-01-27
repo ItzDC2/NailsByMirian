@@ -3,6 +3,46 @@ require_once "php/config.php";
 // include "php/register_auth.php";
 // error_reporting(0);
 session_start();
+
+function estaOkFechaI($fechaCita) {
+    $hoy = date('Y-m-d');
+    $fechaCita = date('Y-m-d', strtotime($fechaCita));
+    return $hoy <= $fechaCita;
+}
+
+function borrarCitaI($bd, $fechaCita, $email) {
+    if(!estaOkFechaI($fechaCita)) {
+        $delete = "DELETE * FROM Citas WHERE FechaCita = '" .  date('Y-m-d', strtotime($fechaCita)) . "' AND Email = '" . $email . "'";
+        $resultado = $bd->query($delete);
+    }
+}
+
+function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) { 
+    $query = "SELECT * FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'";
+    $resultado = $bd->query($query);
+    $lineas = $resultado->num_rows;
+    if($lineas != 0) {
+        $hoy = date('Y-m-d');
+        if($hoy > $fechaCita) {
+            $queryDelete = "DELETE FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'" . " AND Email = '" . $email . "'";
+            $resultadoDelete = $bd->query($queryDelete);
+            if($resultadoDelete) {
+                unset($_SESSION['notifi'][$nLinea]);
+            }
+        } else if($fechaCita <= $hoy) {
+            $queryComprobar = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
+            $resultado = $bd->query($queryComprobar);
+            $lineas = $resultado->num_rows;
+            if($lineas != 0) {
+                while($linea = mysqli_fetch_assoc($resultado)) {
+                    $fechaCitaL = $linea['FechaCita'];
+                    $horaCitaL = $linea['HoraCita'];
+                }
+                $_SESSION['notifi'][$nLinea] = "<p>Recordatorio: Tienes una cita el día " . date('d-m-Y',  strtotime($fechaCita)) . " a las " . date('h:i ' . strtoupper('a'),  strtotime($horaCita)) ."</p>";               
+             }
+        }
+    }
+}
 ?>
 <html lang="en">
 
@@ -16,12 +56,14 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/show.js"></script>
     <title>MirianNails</title>
 </head>
 
 <body>
     <img src="imgs/nail.jpg" id="logo">
+    
     <div class="navegacion">
         <ul type="none" id="enlaces">
             <li class="hoverable"><a href="cita.php">Pide Cita</a></li>
@@ -108,7 +150,7 @@ session_start();
                                     clicks = 0;
                                 }
 
-                            } //Ignorar el error, VS lo lee como mal porque ya está cerrada la función.
+                            }
                         <?php
                         }
                         ?>
@@ -119,6 +161,39 @@ session_start();
                         <h4>Notificaciones</h4>
                     </li>
                     <?php 
+                    $email = $_SESSION['Email'];
+                    $queryCambios = "SELECT Descripcion FROM Cambios WHERE Email = '" . $email . "'";
+                    $resultado = $bd->query($queryCambios);
+                    $lineas = $resultado->num_rows;
+                    if($lineas != 0) {
+                        while($linea = $resultado->fetch_assoc()) {
+                            $linea['Descripcion'] = $_SESSION['notifi'][200];
+                        }
+                    } else {
+                        unset($_SESSION['notifi'][200]);
+                    }
+                    if(!empty($_SESSION['notifi'][200])) {
+                        ?>
+                        <li class="collection-item">
+                            <?php 
+                            echo $_SESSION['notifi'][200];
+                            unset($_SESSION['notifi'][200]);
+                            $queryDelete = "DELETE FROM Cambios WHERE Email = '" . $email . "'";
+                            $bd->query($queryDelete);
+                            ?>
+                        </li>
+                    <?php 
+                    }
+                    if(!empty($_SESSION['notifi'][201])) {
+                        ?>
+                        <li class="collection-item">
+                            <?php 
+                            echo $_SESSION['notifi'][201];
+                            unset($_SESSION['notifi'][201]);
+                            ?>
+                        </li>
+                    <?php 
+                    }
                     if(!empty($_SESSION['notifi'][103])) {
                         ?>
                         <li class="collection-item">
@@ -153,6 +228,9 @@ session_start();
                                 while($linea = $resultado->fetch_assoc()) {
                                     $fechaCita = $linea['FechaCita'];
                                     $horaCita = $linea['HoraCita'];
+                                    $email = $linea['Email'];
+                                    borrarCitaI($bd, $fechaCita, $email);
+                                    sqlComprobarCita($bd, $fechaCita, $horaCita, $_SESSION['Email'], $i);
                                     $_SESSION['notifi'][$i] = "<p>Recordatorio: Tienes una cita el día " . date('d-m-Y', strtotime($fechaCita)) . " a las " . date('h:i ' . strtoupper('a'), strtotime($horaCita)) . "</p>";
                                     ?>
                                 <li class="collection-item">

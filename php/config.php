@@ -22,33 +22,6 @@
         echo $js_code; 
     }
 
-    function sqlComprobarCita($bd, $fechaCita, $horaCita, $email) { 
-        $query = "SELECT * FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'";
-        $resultado = $bd->query($query);
-        $lineas = $resultado->num_rows;
-        if($lineas != 0) {
-            $hoy = date('Y-m-d');
-            if($fechaCita > $hoy) {
-                $queryDelete = "DELETE FROM Citas WHERE FechaCita = '" . $fechaCita . "'" . " AND HoraCita = '" . $horaCita . "'" . " AND Email = '" . $email . "'";
-                $resultadoDelete = $bd->query($queryDelete);
-                if($resultadoDelete) {
-                    unset($_SESSION['notifi'][1]);
-                }
-            } else if($fechaCita <= $hoy) {
-                $queryComprobar = "SELECT * FROM Citas WHERE Email = '" . $_SESSION['Email'] . "'";
-                $resultado = $bd->query($queryComprobar);
-                $lineas = $resultado->num_rows;
-                if($lineas != 0) {
-                    while($linea = mysqli_fetch_assoc($resultado)) {
-                        $fechaCitaL = $linea['FechaCita'];
-                        $horaCitaL = $linea['HoraCita'];
-                    }
-                    $_SESSION['notifi'][1] = "<p>Recordatorio: Tienes una cita el día " . date('d-m-Y',  strtotime($fechaCita)) . " a las " . date('h:i ' . strtoupper('a'),  strtotime($horaCita)) ."</p>";               
-                 }
-            }
-        }
-    }
-
     define('BD_SRV', 'localhost');
     define('BD_USR', 'root');
     define('BD_CNT', '');

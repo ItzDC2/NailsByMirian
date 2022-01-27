@@ -7,8 +7,9 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
     $query = "INSERT INTO Intrusos (Email, IP) VALUES ('" . $intruso . "'," . " '" . $ip . "')";
     $resultado = $bd->query($query);
     if ($resultado != false) {
-        echo "Eres un poquillo espabilado, pero aquí gano yo.<br>";
-        echo "Se ha guardado tu información.";
+        header("HTTP/1.0 404 Not Found");
+        // echo "Eres un poquillo espabilado, pero aquí gano yo.<br>";
+        // echo "Se ha guardado tu información.";
         die();
     }
 } else {

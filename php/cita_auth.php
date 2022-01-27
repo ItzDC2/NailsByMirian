@@ -178,9 +178,9 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     $nCitas = (int) $linea['NumeroCitas'] + 1; 
                 }
             } else {
-                $nCitas = "1";
+                $nCitas = 1;
             }
-            if($nCitas > 10) {
+            if($nCitas <= 10) {
                 insertarCita($bd, $email, $fechaCitaF, $horaCitaF, $concepto, $nCitas);
                 $exito = true;
             } else {
@@ -229,18 +229,6 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
         <div id="comentarioOk" class="col s6 card-panel center-align" style="margin-top: 25px;">
             <span id="texto">¡Todo ha ido bien <?php echo $_SESSION['nombre'] ?>!<br>
                 Tu cita para el día <b><?php echo $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']?></b> <?php echo "se ha registrado correctamente!";
-                // $_SESSION['notifi'][0] = "<p>Recordatorio: Tienes una cita el día " . $_SESSION['fechaCita'] . " a las " . $_SESSION['horaCita']."</p>";
-                // $query = "SELECT * FROM Citas WHERE Email = '" . $email . "'";
-                // $resultado = $bd->query($query);
-                // $lineas = $resultado->num_rows;
-                // if($lineas != 0) {
-                //     while($lineas <= $nCitas) {
-                //         $fecha = "SELECT FechaCita FROM Citas WHERE Email = '" . $email . "'";
-                //         $hora = "SELECT HoraCita FROM Citas WHERE Email = '" . $email . "'";
-                //         $_SESSION['notifi']['$lineas'] = "<p>Recordatorio: Tienes una cita el día " . $fecha . " a las " . $hora . "</p>";
-                //         $lineas++;
-                //     }
-                // }
                 ?>
                 <br>
                 Serás redirigid@ a la pantalla inicial en <span id="tiempo"></span> <span id="secs">segundos...</span>

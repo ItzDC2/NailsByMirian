@@ -78,6 +78,11 @@ input:focus {
   background-color: #e6967b !important;
 }
 
+.waves-effect:focus {
+  color: white;
+  background-color: #e6967b;
+}
+
 .is-today {
   color: #e6967b !important;
   text-decoration: underline;

@@ -5,4 +5,3 @@ function redireccion() {
 }
 
 boton.addEventListener(onclick=redireccion());
-
