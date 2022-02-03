@@ -47,15 +47,15 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
             $queryIntrusos = "SELECT * FROM Intrusos";
             $resultado = $bd->query($queryIntrusos);
             $lineasResultado = $resultado->num_rows;
-            if($lineasResultado == 0) {
-                $alertaSeguridadN = "¡No hay ninguna alerta de seguridad!";
-            } else {
-        ?>
-        <div class="cuerpo">
-        <p>
+            ?>
+            <div class="cuerpo">
+                
+            <p>
             <?php 
-                if($lineasResultado == 0) {
-                    echo $alertaSeguridadN;
+                if($lineasResultado == 0) { 
+                    $alertaSeguridadN = "¡No hay ninguna alerta de seguridad!"; ?>
+                    <p><?php echo $alertaSeguridadN; ?></p> 
+            <?php
                 } else {
                     while($linea = $resultado->fetch_assoc()) {
                     $email = $linea['Email'];
@@ -87,5 +87,4 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
     </html>
 <?php
     mysqli_close($bd);
-}
 ?>

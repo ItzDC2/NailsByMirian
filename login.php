@@ -25,9 +25,9 @@
                 <p>
                     ¡Ya has iniciado sesión!
                 </p>
-                <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index.php'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
                 <p id="comentarioVolver">
-                    O si quieres, dale click <a href="php/logout.php">aquí</a> para cerrar sesión.
+                    O si quieres, dale click <a href="php/logout">aquí</a> para cerrar sesión.
                 </p>
             </div>
         </div>
@@ -54,10 +54,10 @@
     <title>Login</title>
 </head>
 <body onload="scroll()">
-    <a href="index.php" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
+    <a href="index" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
     <br>
     <div id="loginPanel" class="col s6 offset-s3 card-panel hoverable">
-        <form id="login" action="php/login_auth.php" method="post" class="col s12" onsubmit="window.location.href='/php/login_auth.php'">
+        <form id="login" action="php/login_auth" method="post" class="col s12" onsubmit="window.location.href='/php/login_auth'">
             <h2>Inicia Sesión</h2>
             <div class="row">
                 <div class="input-field col s12">
@@ -71,11 +71,11 @@
                     <label for="iContra">Contraseña <i class="bi bi-key-fill"></i></label>
                 </div>
             </div>
-            <div class="row">
+            <div class="row s12 m6">
                 <button type="submit" class="btn waves-effect">INICIA SESIÓN <i class="bi bi-box-arrow-in-right"></i></button>
             </div>
             <div class="row">
-                <span>¿No tienes cuenta con nosotros? <a href="register.php">Regístrate</a>.</span>
+                <span>¿No tienes cuenta con nosotros? <a href="register">Regístrate</a>.</span>
             </div>
         </form>
     </div>

@@ -39,7 +39,8 @@ function escribirComentario($comentario) {
 
 function estaOkTelefono($telefono) {
     $ruta = "../js/json/archivo.json";
-    if(strlen($telefono) != 9 || !is_numeric($telefono)) {
+    $cuenta = strlen($telefono);
+    if(strlen($telefono) < 9 || !is_numeric($telefono)) {
         $comentario = "<p>El teléfono no cumple los requisitos estándares de ser al menos 9 caracteres numéricos.</p>";
         file_put_contents($ruta, json_encode($comentario), true);
         $resultado = false;
@@ -60,7 +61,8 @@ function estaOkTelefono($telefono) {
             $contra = md5($_REQUEST["iContra"]);
             $contra2 = md5($_REQUEST["iContra2"]);
             if (!empty($nombre) && !empty($apellidos) && !empty($email) && !empty($telefono) && !empty($contra) && !empty($contra2)) {
-                if (estanOk($contra, $contra2) && estaOkTelefono($telefono)) {
+                if (estanOk($contra, $contra2)) 
+                if(estaOkTelefono($telefono)) {
                     $nombre = stripslashes($nombre);
                     $nombre = sanitizar($bd, $nombre);
                     $nombre = sanitizar2($nombre);
@@ -84,7 +86,6 @@ function estaOkTelefono($telefono) {
                             $fechaCrea = date("Y-m-d H:i:s");
                             $sql = "INSERT INTO Usuarios (Nombre, Apellidos, Email, Telefono, Contra, FechaCrea) VALUES" . " ('" . $nombre . "', '" .
                                 $apellidos . "'" . ", '" . $email . "', '" . $telefono . "', '" . $contra . "', '" . $fechaCrea . "');";
-                
                             $resultado = mysqli_query($bd, $sql) or die(mysqli_error($bd));
                 
                             if ($resultado) {
@@ -107,7 +108,7 @@ function estaOkTelefono($telefono) {
             }
         }
     } else {
-        header('Location: ../index.php');
+        header('Location: ../index');
     }
     
     mysqli_close($bd); 
@@ -130,7 +131,7 @@ function estaOkTelefono($telefono) {
 </head>
 
 <body onload="progress()">
-    <a href="../index.php" class="alogo"><img src="../imgs/nail.jpg" id="logo"></a>
+    <a href="../index" class="alogo"><img src="../imgs/nail.jpg" id="logo"></a>
     <script>
 
     </script>
@@ -158,7 +159,7 @@ function estaOkTelefono($telefono) {
                         }
                         if (tiempoRestante == 0) {
                             document.getElementById("texto").textContent = "Redireccionando..."
-                            window.location.href = "../index.php"
+                            window.location.href = "../index"
                             clearInterval(tiempoDescarga)
                         }
                         tiempoRestante--;
@@ -171,7 +172,7 @@ function estaOkTelefono($telefono) {
                 <div class="row">
                     <br>
                     <div class="col s6 offset-s3">
-                        <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index.php'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
+                        <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
                     </div>
                 </div>
         </div>
@@ -187,9 +188,7 @@ function estaOkTelefono($telefono) {
                 Error: <br>
                 <?php
                 $comentarioLocal = json_decode(file_get_contents("../js/json/archivo.json"), true);
-                if (empty($comentarioLocal)) {
-                    //nada pasa...
-                } else {
+                if (!empty($comentarioLocal)) {
                     $comentarioError = $comentarioLocal;
                     echo $comentarioError;
                 }
@@ -197,7 +196,7 @@ function estaOkTelefono($telefono) {
 
                 ?>
             </p>
-            <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../register.php'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+            <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../register'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
         </div>
     <?php
             mysqli_close($bd);

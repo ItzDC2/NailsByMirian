@@ -21,9 +21,9 @@ require_once("php/config.php");
                     <p>
                         ¡Ya has iniciado sesión!
                     </p>
-                    <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index.php'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                    <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='./index'" style="width: 25%; background-color: #e6967b !important; color: black; text-transform: uppercase;">Volver <i class="bi bi-box-arrow-in-left"></i></button>
                     <p id="comentarioVolver">
-                        O si quieres, dale click <a href="php/logout.php">aquí</a> para cerrar sesión.
+                        O si quieres, dale click <a href="php/logout">aquí</a> para cerrar sesión.
                     </p>
                 </div>
             </div>
@@ -49,10 +49,10 @@ require_once("php/config.php");
 </head>
 
 <body onload="scroll()">
-    <a href="index.php" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
+    <a href="index" class="alogo"><img src="imgs/nail.jpg" id="logo"></a>
     <br>
     <div id="loginPanel" class="col s6 offset-s3 card-panel hoverable">
-        <form id="login" method="post" class="col s12" action="php/register_auth.php">
+        <form id="login" method="post" class="col s12" action="php/register_auth">
             <h2>Crea tu cuenta</h2>
             <div class="row">
                 <div class="input-field col s6">
@@ -92,7 +92,7 @@ require_once("php/config.php");
                 <button type="submit" class="btn waves-effect" name="regButton">REGÍSTRATE <i class="bi bi-box-arrow-in-right"></i></button>
             </div>
             <div class="row">
-                <span>¿Ya tienes una cuenta con nosotros? <a href="login.php">Inicia sesión</a>.</span>
+                <span>¿Ya tienes una cuenta con nosotros? <a href="login">Inicia sesión</a>.</span>
             </div>
         </form>
     </div>

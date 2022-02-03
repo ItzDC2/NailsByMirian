@@ -1,7 +1,5 @@
 <?php
 require_once "php/config.php";
-// include "php/register_auth.php";
-// error_reporting(0);
 session_start();
 
 function estaOkFechaI($fechaCita) {
@@ -58,35 +56,42 @@ function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) {
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/show.js"></script>
+    <script defer src="js/temas.js"></script>
     <title>MirianNails</title>
 </head>
 
-<body>
+<body class="oscuro">
     <img src="imgs/nail.jpg" id="logo">
     
-    <div class="navegacion">
+    <div class="navegacion col s12 m6">
         <ul type="none" id="enlaces">
-            <li class="hoverable"><a href="cita.php">Pide Cita</a></li>
-            <li class="hoverable"><a href="#">Contáctanos</a></li>
-            <li class="hoverable"><a href="#">Conócenos</a></li>
+            <li class="cita"><a href="cita">Pide Cita</a></li>
+            <li class="contacto"><a href="#">Contáctanos</a></li>
+            <li class="conocenos"><a href="#">Conócenos</a></li>
             <?php
-            // session_start();
-            $doc = "login.php";
+            $doc = "login";
             if (!$_SESSION['logueado']) {
-                echo "<li><a href='$doc'>Inicia Sesión</a></li>";
+                echo "<li class='iniciaSesion'><a href='$doc'>Inicia Sesión</a></li>";
             } else {
                 echo "</ul>";
             ?>
                 <?php
                 if ($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email'] == 'donovancf12380@gmail.com') {
-                ?>
-                    <div class="card-panel hoverable valign-wrapper hoverable" id="panel">
-                        <i class="material-icons" id="iconoPanel">admin_panel_settings</i> Panel de Administración
+                ?> 
+                    <div class="card-panel hoverable valign-wrapper" id="panel">
+                        <i class="bi bi-shield-check" id="iconoAdmin" style="padding: 10px 5px; text-decoration: none; font-style: normal;"> Panel de Administración</i> 
                     </div>
                     <script>
+                        var intervalo = setInterval(() => {
+                            if(window.innerWidth <= 460) {
+                            $("#iconoAdmin").text("")
+                            } else {
+                                $("#iconoAdmin").text(" Panel de Administración")
+                            }
+                        }, 1)
                         var panel = document.getElementById("panel");
                         panel.onclick = function() {
-                            window.open("b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64.php", '_blank')
+                            window.open("b09c600fddc573f117449b3723f23d64/b09c600fddc573f117449b3723f23d64", '_blank')
                         }
                     </script>
                 <?php
@@ -113,47 +118,25 @@ function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) {
                             var punto = document.getElementById("puntoNotificaciones")
                             var listaNotificaciones = document.getElementById("listaNot");
                             var campana = document.getElementById("notificaciones");
-                            <?php
-                            if (!(empty($_SESSION['fechaCita'])) && !(empty($_SESSION['horaCita']))) {
-                            ?>
-                                if (clicks == 0) {
-                                    if (clickeado == true) {
-                                        punto.style.visibility = 'hidden'
-                                    } else {
-                                        punto.style.visibility = 'visible'
-                                    }
+                            if (clicks == 0) {
+                                if (clickeado == true) {
                                     punto.style.visibility = 'hidden'
-                                    listaNotificaciones.style.visibility = 'visible';
-                                    campana.className = "bi bi-bell-fill seleccionado"
-                                    clickeado = true
-                                    clicks++;
                                 } else {
-                                    listaNotificaciones.style.visibility = 'hidden';
-                                    campana.className = "bi bi-bell"
-                                    clicks = 0;
+                                    punto.style.visibility = 'visible'
                                 }
-                            }
-                            <?php
+                                punto.style.visibility = 'hidden'
+                                listaNotificaciones.style.visibility = 'visible';
+                                campana.className = "bi bi-bell-fill seleccionado"
+                                clickeado = true
+                                clicks++;
                             } else {
-                            ?>
-                                punto.style.visibility = 'hidden';
                                 listaNotificaciones.style.visibility = 'hidden';
-                                if (clicks == 0) {
-                                    listaNotificaciones.style.visibility = 'visible';
-                                    punto.style.visibility = 'hidden';
-                                    campana.className = "bi bi-bell-fill seleccionado"
-                                    clicks++;
-                                } else {
-                                    listaNotificaciones.style.visibility = 'hidden';
-                                    punto.style.visibility = 'hidden'
-                                    campana.className = "bi bi-bell"
-                                    clicks = 0;
-                                }
-
+                                campana.className = "bi bi-bell"
+                                clicks = 0;
                             }
-                        <?php
+
                         }
-                        ?>
+
                     </script>
                 </div>
                 <ul class="collection with-header hoverable" id="listaNot">
@@ -167,7 +150,7 @@ function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) {
                     $lineas = $resultado->num_rows;
                     if($lineas != 0) {
                         while($linea = $resultado->fetch_assoc()) {
-                            $linea['Descripcion'] = $_SESSION['notifi'][200];
+                            $_SESSION['notifi'][200] = $linea['Descripcion'];
                         }
                     } else {
                         unset($_SESSION['notifi'][200]);
@@ -177,9 +160,9 @@ function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) {
                         <li class="collection-item">
                             <?php 
                             echo $_SESSION['notifi'][200];
-                            unset($_SESSION['notifi'][200]);
                             $queryDelete = "DELETE FROM Cambios WHERE Email = '" . $email . "'";
                             $bd->query($queryDelete);
+                            unset($_SESSION['notifi'][200]);
                             ?>
                         </li>
                     <?php 
@@ -253,7 +236,7 @@ function sqlComprobarCita($bd, $fechaCita, $horaCita, $email, $nLinea) {
                     ?>
                 </ul>
                 <ul class="collection" id="listaShow" style="visibility: hidden;">
-                    <li class="collection-item" onclick="window.location.href='php/logout.php'">Cerrar sesión</li>
+                    <li class="collection-item" onclick="window.location.href='php/logout'">Cerrar sesión</li>
                 </ul>
                 <?php 
             } //ciere del ELSE 

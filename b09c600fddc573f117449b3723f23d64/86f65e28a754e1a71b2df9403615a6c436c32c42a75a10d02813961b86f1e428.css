@@ -1,3 +1,47 @@
+h1 {
+    display: inline-block;
+    padding: 5px;
+    font-size: 3em !important;
+    width: 100%; 
+}
+
+.cargador {
+    margin: 25% auto 0;
+    text-align: center;
+}
+
+.cargador > div {
+    width: 20px;
+    height: 20px;
+    background-color: #e6967b;
+    border-radius: 50%;
+    display: inline-block;
+    animation: saltar 1.4s ease-in-out infinite both;
+}
+
+.tituloCargador {
+    font-family: inherit;
+    text-align: center;
+    color: #e6967b;
+}
+
+.cargador .punto1 {
+    animation-delay: -0.32s;
+}
+
+.cargador .punto2 {
+    animation-delay: -0.16s;
+}
+
+@keyframes saltar {
+    0%, 80%, 100% {
+        transform: scale(0)
+    }
+    40% {
+        transform: scale(1.0);
+    }
+}
+
 img {
     margin-bottom: -50px;
 }
@@ -10,6 +54,7 @@ img {
 }
 
 .title {
+    padding: 10px !important;
     margin-top: 25px !important;
     color: #e6967b;
     margin-bottom: -7px !important;
@@ -49,7 +94,7 @@ li {
     border-radius: 5px;
 }
 
-li.usuarios:hover, li.citas:hover, li.alertas:hover, li.volver:hover {
+li.usuarios:hover, li.citas:hover, li.alertas:hover, li.volver:hover, li.admLogs:hover, li.citasLog:hover {
     background-color: lightgray !important;
     color: #e6967b;
     cursor: pointer;

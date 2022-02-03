@@ -3,6 +3,11 @@
     padding: 5px;
 }
 
+#comentarioPHPLAuth {
+    text-align: center !important;
+    padding: 25px !important;
+}
+
 body {
     text-align: center;
 }
@@ -17,16 +22,16 @@ body {
 }
 
 #aceptarBtn {
-    width: 50%;
+    width: 100% !important;
     background-color: #e6967b !important;
-    color: black;
+    color: white !important;
     text-transform: uppercase;
 }
 
 #errorBtn {
-    width: 50%;
+    width: 100% !important;
     background-color: #e6967b !important;
-    color: black;
+    color: white !important;
     text-transform: uppercase;
 }
 
@@ -34,9 +39,18 @@ body {
     padding: 50px !important;
 }
 
+#errorPHPLAuth {
+    padding: 50px !important;
+}
+
 .waves-effect {
-    background-color: #e6967b !important;
-    color: white !important;
+    background-color: white !important;
+    color: #e6967b !important;
+}
+
+.waves-effect:hover {
+    background-color: #e6967b;
+    color: white;
 }
 
 button:hover {

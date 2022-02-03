@@ -78,9 +78,9 @@ if (!$_SESSION['logueado']) {
     </head>
 
     <body onload="progress()">
-        <a href="../index.php" class="alogo"><img src="../imgs/nail.jpg" id="logo"></a>
+        <a href="../index" class="alogo"><img src="../imgs/nail.jpg" id="logo"></a>
         <div class="row">
-            <div id="comentarioPHP" class="col s6 offset-s3 card-panel center-align">
+            <div id="comentarioPHPLAuth" class="col s6 offset-s3 card-panel center-align">
                 <p>
                     <span id="texto">¡Has iniciado sesión correctamente!<br>
                         Serás redireccionad@ a la página principal en <span id="tiempo"></span> <span id="secs">segundos</span>...</span>
@@ -124,27 +124,27 @@ if (!$_SESSION['logueado']) {
                             }
                             if (tiempoRestante == 0) {
                                 document.getElementById("texto").textContent = "Redireccionando..."
-                                window.location.href = "../index.php"
+                                window.location.href = "../index"
                                 clearInterval(tiempoDescarga)
                             }
                             tiempoRestante--;
                         }, 1000);
                     </script>
-                    <div class="progress col s6 offset-s3" style="width: 50%">
+                    <div class="progress col s6 offset-s3">
                         <div class="determinate" id="progreso" style="background-color: #0075ff;"></div>
                     </div>
                     <!-- <progress value=0 max=10 id="progreso" onload="progress()"></progress> -->
                     <div class="row">
                         <br>
                         <div class="col s6 offset-s3">
-                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index.php'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
+                            <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
                         </div>
                     </div>
             </div>
         <?php
                 } else {
         ?>
-            <div id="errorPHP" class="col s6 offset-s3 card-panel center-align hoverable" style="padding: 10px; border: 1px solid red;">
+            <div id="errorPHPLAuth" class="col s6 offset-s3 card-panel center-align hoverable" style="padding: 10px; border: 1px solid red;">
                 <script>
                     document.getElementById("errorPHP").style.visibility = 'visible';
                     document.getElementById("comentarioPHP").style.visibility = 'hidden';
@@ -159,7 +159,7 @@ if (!$_SESSION['logueado']) {
                     }
                     ?>
                 </p>
-                <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../login.php'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                <button type="submit" class="btn waves-effect" id="errorBtn" onclick="window.location.href='../login'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
             </div>
         <?php
                 }
@@ -171,7 +171,7 @@ if (!$_SESSION['logueado']) {
     </html>
 <?php
 } else {
-    header('Location: ../index.php');
+    header('Location: ../index');
 }
 
 ?>

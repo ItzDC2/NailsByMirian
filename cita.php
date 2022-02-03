@@ -27,9 +27,9 @@ session_start();
     if ($_SESSION['logueado'] == true) {
     ?>
     <div id="logoDiv">
-        <a href="index.php"><img src="imgs/nail.jpg" id="logo"></a>
+        <a href="index"><img src="imgs/nail.jpg" id="logo"></a>
     </div>
-        <form action="php/cita_auth.php" id="formCita" class="col s12" method="post" onsubmit="window.location.href='php/cita_auth.php'">
+        <form action="php/cita_auth" id="formCita" class="col s12" method="post" onsubmit="window.location.href='php/cita_auth'">
             <div class="container">
                 <div class="card-panel col s12 center-align hoverable">
                     <h3>Pide Cita Aquí <?php echo ucfirst($_SESSION['nombre']) ?></h3>
@@ -46,21 +46,21 @@ session_start();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field">
+                    <div class="col s12 input-field">
                         <label for="descripcionI">Breve descripción del set a realizar.</label>
-                        <input type="text" name="descripcionI" id="descripcionI"> 
+                        <input type="text" name="descripcionI" id="descripcionI" required> 
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div id="enviarCitaDiv">
-                    <button type="submit" id="enviarCita" class="btn waves-effect">¡Pide Cita! <i class="bi bi-box-arrow-in-right"></i></button>
+                    <button type="submit" id="enviarCita" class="waves-effect waves-light btn">¡Pide Cita! <i class="bi bi-box-arrow-in-right"></i></button>
                 </div>
             </div>
         </form>
     <?php
     } else {
-        header('Location: login.php');
+        header('Location: login');
     }
     ?>
 </body>

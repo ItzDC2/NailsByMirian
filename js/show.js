@@ -6,20 +6,9 @@ function show() {
     var lista = document.getElementById("listaShow")
     lista.style.visibility = 'visible';
     numClicks++
-    if(numClicks == 2 || (getCoordenadasX() < 1026 && getCoordenadasY() > 59)) {
+    if(numClicks == 2) {
         op.className="bi bi-gear vueltaRotado";
         lista.style.visibility = 'hidden';
         numClicks = 0;
     }
 }
-
-function getCoordenadasX(event) {
-    return event.clientX;
-}
-
-function getCoordenadasY(event) {
-    return event.clientY;
-}
-
-document.addEventListener("click", getCoordenadasX)
-document.addEventListener("click", getCoordenadasY)

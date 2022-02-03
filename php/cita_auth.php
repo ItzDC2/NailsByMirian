@@ -55,10 +55,20 @@ function estaOkFecha($fecha) {
 
 function insertarCita($bd, $email, $fechaCita, $horaCita, $concepto, $nCitas) {
     $concepto = sanitizar($bd, $_SESSION['Concepto']);
-    $query = "INSERT INTO Citas (Email, FechaCita, HoraCita, Descripcion, NumeroCitas) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "', '" . $concepto  . "', '" . $nCitas . "')";
-    $resultado = $bd->query($query);
-    if(!$resultado) {
-        $comentarioCita = "<p>Ha habido un error ejecutando la consulta, por favor, inténtelo más tarde.</p>";
+    if(strlen($concepto < 6)) {
+        $query = "INSERT INTO Citas (Email, FechaCita, HoraCita, Descripcion, NumeroCitas) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "', '" . $concepto  . "', '" . $nCitas . "')";
+        $queryLog = "INSERT INTO CitasLog (Email, FechaCita, HoraCita, Descripcion) VALUES ('" . $email . "', '" . $fechaCita . "', '" . $horaCita . "', '" . $concepto . "')"; 
+        $resultado = $bd->query($query);
+        $resultadoLog = $bd->query($queryLog);
+        if(!$resultado) {
+            $comentarioCita = "<p>Ha habido un error ejecutando la consulta, por favor, inténtelo más tarde.</p>";
+            escribirComentarioCita($comentarioCita);
+        } else if(!$resultadoLog) {
+            $comentarioCita = "<p>Ha habido un error ejecutando la consulta log, por favor, inténtelo más tarde.</p>";
+            escribirComentarioCita($comentarioCita);
+        }
+    } else {
+        $comentarioCita = "<p>La descripción debe tener un mínimo de 6 caracteres</P>";
         escribirComentarioCita($comentarioCita);
     }
 }
@@ -193,10 +203,6 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
             escribirComentarioCita($comentarioCita);
             $exito = false;
         }
-    // } else {
-    //     $comentarioCita = "<p>Hubo un error con la fecha y hora de la cita, vuelva a intentarlo más tarde. " . $_SESSION['fechaCita'] . " " . $_SESSION['horaCita'] . "</p>";
-    //     escribirComentarioCita($comentarioCita);
-    //     $exito = false;
     }
 } else {
     $comentarioCita = "<p>Se debe elegir fecha y hora para poder tramitar la cita.</p>";
@@ -242,7 +248,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     }
                     if (tiempoRestante == 0) {
                         document.getElementById("texto").textContent = "Redireccionando..."
-                        window.location.href = "../index.php"
+                        window.location.href = "../index"
                         clearInterval(tiempoDescarga)
                     }
                     tiempoRestante--;
@@ -255,11 +261,10 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
             </div>
             <div class="row">
                 <div class="col s6 offset-s3">
-                    <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index.php'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
+                    <button type="submit" class="btn waves-effect" id="aceptarBtn" onclick="window.location.href='../index'">Aceptar <i class="bi bi-box-arrow-in-right"></i></button>
                 </div>
             </div>
-            <!-- </div> -->
-            </div>
+        </div>
         <?php
     } else {
         ?>
@@ -278,7 +283,7 @@ if (!empty($_SESSION['fechaCita']) && !empty($_SESSION['horaCita'])) {
                     ?>
                     <div class="row">
                         <div class="col s6 offset-s3">
-                            <button type="submit" class="btn waves-effect" id="aceptarBtn" style="margin-top: 15px;" onclick="window.location.href='../cita.php'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
+                            <button type="submit" class="btn waves-effect" id="aceptarBtn" style="margin-top: 15px;" onclick="window.location.href='../cita'">Volver <i class="bi bi-box-arrow-in-left"></i></button>
                         </div>
                     </div>
                 </div>

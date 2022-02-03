@@ -31,7 +31,7 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-        <script src="./b79a49cdbeb97932475598d35501b088820c20c6.js"></script>
+        <script src="b79a49cdbeb97932475598d35501b088820c20c6.js"></script>
         <title>Panel de administración de Nails By Mirián</title>
     </head>
 
@@ -46,9 +46,9 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
         }
         ?>
         <div id="cuerpo" class="card-panel hoverable col s10" style="margin: 0 auto; overflow: auto; display: block;">
-            <a href="" class="sidenav-trigger" data-target="nav"><i class="bi bi-list-task" id="menuIcon"></i></a>
+            <a href="" class="sidenav-trigger" data-target="navb"><i class="bi bi-list-task" id="menuIcon"></i></a>
             <div class="row center-align">
-                <div class="title col s6 offset-s3">
+                <div class="title">
                     <h1>Panel de Administración</h1>
                     <div class="col s6 offset-s3 center-align" id="bienvenida" style="font-size: 1.2em; color: black;">
                         <?php echo $frase ?>
@@ -56,24 +56,40 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
                 </div>
             </div>
             <div class="row">
-                <div id="citasDiv" style="height: 1000px;">
+                <div class="cargador" onload="esperar()" style="height: 100vh; display: none">
+                    <div class="punto1"></div>
+                    <div class="punto2"></div>
+                    <div class="punto3"></div>
+                    <p class="tituloCargador">Espere un momento por favor, estamos obteniendo la última versión de la página web...</p>
+                </div>
+                <div id="citasDiv" style="height: 100vh;">
                     <script>
                         document.getElementById("citasDiv").innerHTML = '<object type="text/html" data="dfd61b4eaef54a0b47549ada11776024c86f6f20bad0f57f6f8e288c20568bf2.php" style="min-width: 100%; min-height: 100%;"></object>'
                     </script>
                 </div>
-                <div id="usuariosDiv" style="height: 1000px;  display: none;">
+                <div id="usuariosDiv" style="height: 100vh;  display: none;">
                     <script>
                         document.getElementById("usuariosDiv").innerHTML = '<object type="text/html" data="1f4ade47160c389903c1a9e19d2a6739681fa8955f1c7353084e638675297b5d.php" style="min-width: 100%; min-height: 100%;"></object>'
                     </script>
                 </div>
-                <div id="alertasDiv" style="height: 1000px; display: none;">
+                <div id="alertasDiv" style="height: 100vh; display: none;">
                     <script>
                         document.getElementById("alertasDiv").innerHTML = '<object type="text/html" data="218f1e55d3525e1e2db4249d247f0001dbc0b37ef4a4468987fdefb0c4a8422a.php" style="min-width: 100%; min-height: 100%;"></object>'
                     </script>
                 </div>
+                <div id="admLogsDiv" style="height: 100vh; display: none;">
+                    <script>
+                        document.getElementById("admLogsDiv").innerHTML = '<object type="text/html" data="ecf47440639634952e6eda41d24e924170c258e561fc91.php" style="min-width: 100%; min-height: 100%;"></object>'
+                    </script>
+                </div>
+                <div id="citasLogsDiv" style="height: 100vh; display: none;">
+                    <script>
+                        document.getElementById("citasLogsDiv").innerHTML = '<object type="text/html" data="9ec1c6aa2113c93d6449912f39d52cfbc9ff581ae27b747ba681c8edf4117273.php" style="min-width: 100%; min-height: 100%;"></object>'
+                    </script>
+                </div>
             </div>
         </div>
-        <ul id="nav" class="sidenav sidenav-close">
+        <ul id="navb" class="sidenav">
             <li>
                 <div class="user-view">
                     <img src="../imgs/nail.jpg" width="200px" height="200px">
@@ -87,6 +103,8 @@ if (!($_SESSION['Email'] == 'mirianencandelaria@gmail.com' || $_SESSION['Email']
             <li class="citas" onclick="mostrarCitas()"><i class="bi bi-calendar-date"></i> Citas</li>
             <li class="usuarios" onclick="mostrarUsuarios()"><i class="bi bi-people"></i> Usuarios</li>
             <li class="alertas" onclick="mostrarAlertas()"><i class="bi bi-exclamation-triangle"></i> Alertas de seguridad</li>
+            <li class="admLogs" onclick="mostrarAdmLogs()"><i class="bi bi-journal-album"></i> Registros de Administración</li>
+            <li class="citasLog" onclick="mostrarCitasLog()"><i class="bi bi-journal-bookmark-fill"></i> Registros de Citas</li>
             <li class="volver" onclick="window.location.href='../index.php'"><i class="bi bi-box-arrow-in-left"></i> Volver</li>
             <li>
                 <div class="divider"></div>

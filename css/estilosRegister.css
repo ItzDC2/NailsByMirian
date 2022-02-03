@@ -1,3 +1,9 @@
+@media screen and (max-width: 460px) {
+    #loginPanel {
+        width: 85% !important;
+    }
+}
+
 html {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,20 +50,18 @@ button {
 }
 
 .waves-effect {
-    background-color: #e6967b;
+    background-color: white !important;
+    color: #e6967b !important;
+}
+
+.waves-effect:hover {
+    background-color: #e6967b !important;
+    color: white !important;
 }
 
 button:hover {
     cursor:pointer;
 }
-
-/* a.alogo {
-    margin: 0 auto;
-    display: inline-block;
-    width: 250px;
-    height: 250px;
-    z-index: 1;
-} */
 
 #logo {
     width: 235px;
